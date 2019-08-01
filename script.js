@@ -1,3 +1,5 @@
+function init() {
+
 const maxGain = 0.1;
 
 
@@ -102,3 +104,7 @@ volumeSlider.addEventListener('input', function() {
   changeVolume(volumeSlider.value);
   localStorage.setItem('keyboard', volumeSlider.value);
 });
+  
+}
+
+document.addEventListener('click', init);
