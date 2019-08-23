@@ -1,4 +1,4 @@
-function init() {
+function afterFirstUserAction() {
 
   const maxGain = 0.1;
 
@@ -13,7 +13,7 @@ function init() {
 
   const volumeSlider = document.getElementById('volumeSlider');
 
-  const activeLayout = 2;
+  const activeLayout = 0;
   const layouts = [
     //right to left:
     [190, 192, 186, 221, 188, 76, 80, 219, 77, 75, 79, 48, 78, 74, 73, 57, 66, 72, 85, 56, 86, 71, 90, 55, 67, 70, 84, 54, 88, 68, 82, 53, 89, 83, 69, 52, 226, 65, 87, 51],
@@ -85,11 +85,12 @@ function init() {
   document.addEventListener('keydown', keyDown);
   document.addEventListener('keyup', keyUp);
 
-  volumeSlider.addEventListener('input', function() {
+  volumeSlider.addEventListener('input', () => {
     changeVolume(volumeSlider.value);
     localStorage.setItem('keyboard', volumeSlider.value);
   });
   
+  document.removeEventListener('click', afterFirstUserAction);
 }
 
-document.addEventListener('click', init);
+document.addEventListener('click', afterFirstUserAction);
