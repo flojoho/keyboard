@@ -13,6 +13,13 @@ function afterFirstUserAction() {
 
   const volumeSlider = document.getElementById('volumeSlider');
 
+  const keyboardRows = [
+    [220, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 219, 221, 8],
+    [9, 81, 87, 69, 82, 84, 90, 85, 73, 79, 80, 186, 187],
+    [20, 65, 83, 68, 70, 71, 72, 74, 75, 76, 192, 222, 191],
+    [226, 89, 88, 67, 86, 66, 78, 77, 188, 190, 189, 16]
+  ]
+
   const activeLayout = 0;
   const layouts = [
     //right to left:
@@ -90,7 +97,7 @@ function afterFirstUserAction() {
     localStorage.setItem('keyboard', volumeSlider.value);
   });
   
-  document.removeEventListener('click', afterFirstUserAction);
+  document.removeEventListener('keyup', afterFirstUserAction);
 }
 
-document.addEventListener('click', afterFirstUserAction);
+document.addEventListener('keyup', afterFirstUserAction);
