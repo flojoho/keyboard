@@ -25,7 +25,7 @@ function afterFirstUserAction() {
       ];
       keyboardRows.map((row, rowNum) => {
         row.map((keyCode, index) => {
-          addOscillator(keyCode, rowNum*intervalBetweenRows + index - 24); //minus 24 because otherwise the lowest note is 440Hz; todo: prettier solution for this
+          addOscillator(keyCode, rowNum*intervalBetweenRows + index - 18);
         });
       });
       return;
@@ -80,27 +80,43 @@ function afterFirstUserAction() {
     if(oscillators[keyCode]) oscillators[keyCode].disconnect(volume);
   }
 
-  function keyDown(e){
-    
+  //**************************** EVENT HANDLING ************************
+  document.addEventListener('keydown', e => {
+    if([38, 40].includes(e.keyCode)) { // up/down keys
+      const prevVolume = volumeSlider.value;
+      let nextVolume;
+      if (e.keyCode === 38) {
+        nextVolume = parseInt(prevVolume) + 10;
+      } else if (e.keyCode === 40) {
+        nextVolume = prevVolume - 10;
+      }
+      
+      if(nextVolume > 100) nextVolume = 100;
+      if(nextVolume < 0) nextVolume = 0;
+      
+      volumeSlider.value = nextVolume;
+      changeVolume(nextVolume);
+      return;
+    }
+    if([37, 39].includes(e.keyCode)) { //left/right keys
+      return;
+    }
+
     audioCtx.resume(); //very ugly way of doing it
     
     if(keyPressed[e.keyCode] !== true){
       keyPressed[e.keyCode] = true;
       keyGotPressed(e.keyCode);
     }
-  }
+  });
 
-  function keyUp(e){
+  document.addEventListener('keyup', e => {
     if(keyPressed[e.keyCode] !== false){
       keyPressed[e.keyCode] = false;
       
       keyGotReleased(e.keyCode);
     }
-  }
-
-  //**************************** EVENT HANDLING ************************
-  document.addEventListener('keydown', keyDown);
-  document.addEventListener('keyup', keyUp);
+  });
 
   volumeSlider.addEventListener('input', () => {
     changeVolume(volumeSlider.value);
