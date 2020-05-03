@@ -46,9 +46,10 @@ function afterFirstUserAction() {
 
   function changeVolume(percentage){ //todo: should i use a number between 0 and 1 instead of percentages?
     volume.gain.value = percentage / 100 * maxGain;
+    localStorage.setItem('keyboard', percentage);
   }
 
-  if(localStorage.getItem('keyboard') !== null){ //todo: improve this isset-function
+  if(localStorage.getItem('keyboard')){ //todo: improve this isset-function
     const localData = localStorage.getItem('keyboard');
     volumeSlider.value = localData;
     changeVolume(localData);
@@ -120,10 +121,9 @@ function afterFirstUserAction() {
 
   volumeSlider.addEventListener('input', () => {
     changeVolume(volumeSlider.value);
-    localStorage.setItem('keyboard', volumeSlider.value);
   });
   
-  document.removeEventListener('keyup', afterFirstUserAction);
+  document.removeEventListener('keydown', afterFirstUserAction);
 }
 
-document.addEventListener('keyup', afterFirstUserAction);
+document.addEventListener('keydown', afterFirstUserAction);
