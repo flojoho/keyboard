@@ -1,8 +1,8 @@
-import keyMapping, { setTranspose } from './KeyMapping.js';
+import { noteNumberFromKey, transposeUp, transposeDown } from './KeyMapping.js';
 
 function afterFirstUserAction() {
 
-  const maxGain = 0.1;
+  const maxGain = 0.5;
 
   const oscillators = {};
 
@@ -14,9 +14,9 @@ function afterFirstUserAction() {
 
   const volumeSlider = document.getElementById('volumeSlider');
 
-  for(const [keyCode, noteNumber] of Object.entries(keyMapping)) {
-    addOscillator(keyCode, noteNumber);
-  }
+  // for(const [keyCode, noteNumber] of Object.entries(keyMapping)) {
+  //   addOscillator(keyCode, noteNumber);
+  // }
 
   function changeVolume(percentage) { //todo: should i use a number between 0 and 1 instead of percentages?
     volume.gain.value = percentage / 100 * maxGain;
@@ -37,22 +37,26 @@ function afterFirstUserAction() {
     oscillators[keyCode] = audioCtx.createOscillator();
     oscillators[keyCode].frequency.setValueAtTime(frequencyFromNoteNumber(noteNumber), audioCtx.currentTime);
     oscillators[keyCode].type = "square";
+    oscillators[keyCode].connect(volume);
     oscillators[keyCode].start();
+  }
+
+  function removeOscillator(keyCode) {
+    oscillators[keyCode].disconnect(volume);
+    oscillators[keyCode] = null;
   }
 
 
   const keyPressed = [];
 
   function keyGotPressed(keyCode) {
-    //if(noteNumberFromKeyCode[keyCode] !== undefined)
-    
-    //startNote(noteNumberFromKeyCode[e.keyCode]);
-    if(oscillators[keyCode]) oscillators[keyCode].connect(volume);
+    const noteNumber = noteNumberFromKey(keyCode);
+    addOscillator(keyCode, noteNumber);
   }
 
   function keyGotReleased(keyCode) {
-    //stopNote(noteNumberFromKeyCode[e.keyCode]);
-    if(oscillators[keyCode]) oscillators[keyCode].disconnect(volume);
+    const noteNumber = noteNumberFromKey(keyCode);
+    removeOscillator(keyCode, noteNumberFromKey(keyCode));
   }
 
   //**************************** EVENT HANDLING ************************
@@ -73,12 +77,20 @@ function afterFirstUserAction() {
       changeVolume(nextVolume);
       return;
     }
+    
     if(['ArrowLeft', 'ArrowRight'].includes(e.code)) {
+      if(e.code === 'ArrowLeft') {
+        transposeDown();
+      }
+      if(e.code === 'ArrowRight') {
+        transposeUp();
+      }
       return;
     }
-
-    audioCtx.resume(); //very ugly way of doing it
     
+    const noteNumber = noteNumberFromKey(e.code);
+    if(!Number.isInteger(noteNumber)) return;
+
     if(keyPressed[e.code] !== true) {
       keyPressed[e.code] = true;
       keyGotPressed(e.code);
@@ -86,9 +98,11 @@ function afterFirstUserAction() {
   });
 
   document.addEventListener('keyup', e => {
-    if(keyPressed[e.code] !== false){
+    const noteNumber = noteNumberFromKey(e.code);
+    if(!Number.isInteger(noteNumber)) return;
+
+    if(keyPressed[e.code] !== false) {
       keyPressed[e.code] = false;
-      
       keyGotReleased(e.code);
     }
   });

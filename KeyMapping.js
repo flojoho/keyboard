@@ -10,16 +10,25 @@ const keyboardRows = [
   ["Backquote", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal", "Backspace"],
 ];
 
-const keyMapping = {};
+const defaultMapping = {};
 keyboardRows.forEach((row, rowNum) => {
   row.forEach((keyCode, index) => {
-    keyMapping[keyCode] = rowNum * intervalBetweenRows + index + defaultOffset;
+    defaultMapping[keyCode] = rowNum * intervalBetweenRows + index + defaultOffset;
   });
 });
 
-export const setTranspose = () => {
+export const transposeUp = () => {
   transposeNum += 1;
-  console.log(transposeNum);
 };
 
-export default keyMapping;
+export const transposeDown = () => {
+  transposeNum -= 1;
+};
+
+export const noteNumberFromKey = keyCode => {
+  if(!typeof keyCode === 'string') throw new Error('keyCode must be a string');
+
+  const noteNumber = defaultMapping[keyCode];
+  if(!Number.isInteger(noteNumber)) return null;
+  return noteNumber + transposeNum;
+}
