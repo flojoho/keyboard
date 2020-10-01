@@ -2,7 +2,7 @@ import { noteNumberFromKey, transposeUp, transposeDown } from './KeyMapping.js';
 
 function afterFirstUserAction() {
 
-  const maxGain = 0.5;
+  const maxGain = 0.15;
 
   const oscillators = {};
 
@@ -13,10 +13,6 @@ function afterFirstUserAction() {
   volume.connect(audioCtx.destination);
 
   const volumeSlider = document.getElementById('volumeSlider');
-
-  // for(const [keyCode, noteNumber] of Object.entries(keyMapping)) {
-  //   addOscillator(keyCode, noteNumber);
-  // }
 
   function changeVolume(percentage) { //todo: should i use a number between 0 and 1 instead of percentages?
     volume.gain.value = percentage / 100 * maxGain;
@@ -56,7 +52,7 @@ function afterFirstUserAction() {
 
   function keyGotReleased(keyCode) {
     const noteNumber = noteNumberFromKey(keyCode);
-    removeOscillator(keyCode, noteNumberFromKey(keyCode));
+    removeOscillator(keyCode, noteNumber);
   }
 
   //**************************** EVENT HANDLING ************************
@@ -65,9 +61,9 @@ function afterFirstUserAction() {
       const prevVolume = volumeSlider.value;
       let nextVolume;
       if (e.code === 'ArrowUp') {
-        nextVolume = parseInt(prevVolume) + 10;
+        nextVolume = parseInt(prevVolume) + 5;
       } else if (e.code === 'ArrowDown') {
-        nextVolume = prevVolume - 10;
+        nextVolume = prevVolume - 5;
       }
       
       if(nextVolume > 100) nextVolume = 100;
