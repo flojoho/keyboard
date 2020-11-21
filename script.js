@@ -6,23 +6,37 @@ function afterFirstUserAction() {
 
   const oscillators = {};
 
+  console.log('localStorage.getItem(statistics):', JSON.parse(localStorage.getItem('statistics')));
+
   const audioCtx = new AudioContext();
 
-  const volume = audioCtx.createGain();
-  volume.gain.value = maxGain;
-  volume.connect(audioCtx.destination);
+  const volumeNode = audioCtx.createGain();
+  volumeNode.gain.value = maxGain;
+  volumeNode.connect(audioCtx.destination);
 
   const volumeSlider = document.getElementById('volumeSlider');
 
-  function changeVolume(percentage) { //todo: should i use a number between 0 and 1 instead of percentages?
-    volume.gain.value = percentage / 100 * maxGain;
-    localStorage.setItem('keyboard', percentage);
+  function saveStatistics(data) {
+    let statistics = JSON.parse(localStorage.getItem('statistics'));
+    if(typeof statistics !== 'object' || statistics === null) statistics = {};
+
+    for(const [key, value] of Object.entries(data)) {
+      if(typeof statistics[key] !== 'object') statistics[key] = {};
+      if(typeof statistics[key][value] !== 'number') statistics[key][value] = 0;
+      statistics[key][value] += 1;
+    }
+    localStorage.setItem('statistics', JSON.stringify(statistics));
   }
 
-  if(localStorage.getItem('keyboard')) { //todo: improve this isset-function
-    const localData = localStorage.getItem('keyboard');
-    volumeSlider.value = localData;
-    changeVolume(localData);
+  function changeVolume(percentage) { //todo: should i use a number between 0 and 1 instead of percentages?
+    volumeNode.gain.value = percentage / 100 * maxGain;
+    localStorage.setItem('volume', percentage);
+  }
+
+  if(localStorage.getItem('volume')) { //todo: improve this isset-function
+    const volume = localStorage.getItem('volume');
+    volumeSlider.value = volume;
+    changeVolume(volume);
   }
 
   function frequencyFromNoteNumber(noteNumber) {
@@ -33,21 +47,22 @@ function afterFirstUserAction() {
     oscillators[keyCode] = audioCtx.createOscillator();
     oscillators[keyCode].frequency.setValueAtTime(frequencyFromNoteNumber(noteNumber), audioCtx.currentTime);
     oscillators[keyCode].type = "square";
-    oscillators[keyCode].connect(volume);
+    oscillators[keyCode].connect(volumeNode);
     oscillators[keyCode].start();
   }
 
   function removeOscillator(keyCode) {
-    oscillators[keyCode].disconnect(volume);
+    oscillators[keyCode].disconnect(volumeNode);
     oscillators[keyCode] = null;
   }
 
 
-  const keyPressed = [];
+  const keyPressed = {};
 
   function keyGotPressed(keyCode) {
     const noteNumber = noteNumberFromKey(keyCode);
     addOscillator(keyCode, noteNumber);
+    saveStatistics({ volume: volumeSlider.value });
   }
 
   function keyGotReleased(keyCode) {

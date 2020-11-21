@@ -1,6 +1,6 @@
 const intervalBetweenRows = 5;
 
-let transposeNum = 0;
+let offset = parseInt(localStorage.getItem('offset') || '0');
 const defaultOffset = -18;
 
 const keyboardRows = [
@@ -18,11 +18,13 @@ keyboardRows.forEach((row, rowNum) => {
 });
 
 export const transposeUp = () => {
-  transposeNum += 1;
+  offset += 1;
+  localStorage.setItem('offset', offset);
 };
 
 export const transposeDown = () => {
-  transposeNum -= 1;
+  offset -= 1;
+  localStorage.setItem('offset', offset);
 };
 
 export const noteNumberFromKey = keyCode => {
@@ -30,5 +32,5 @@ export const noteNumberFromKey = keyCode => {
 
   const noteNumber = defaultMapping[keyCode];
   if(!Number.isInteger(noteNumber)) return null;
-  return noteNumber + transposeNum;
+  return noteNumber + offset;
 }
