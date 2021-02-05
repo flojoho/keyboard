@@ -15,6 +15,7 @@ function afterFirstUserAction() {
   volumeNode.connect(audioCtx.destination);
 
   const volumeSlider = document.getElementById('volumeSlider');
+  const timbreSelect = document.getElementById('timbreSelect');
 
   function saveStatistics(data) {
     let statistics = JSON.parse(localStorage.getItem('statistics'));
@@ -47,7 +48,7 @@ function afterFirstUserAction() {
     const note = {};
     note.oscillatorNode = audioCtx.createOscillator();
     note.oscillatorNode.frequency.setValueAtTime(frequencyFromNoteNumber(noteNumber), audioCtx.currentTime);
-    note.oscillatorNode.type = "square";
+    note.oscillatorNode.type = timbreSelect.value;
 
     note.gainNode = audioCtx.createGain();
 
