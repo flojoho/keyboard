@@ -4,7 +4,7 @@ function afterFirstUserAction() {
 
   const maxGain = 0.15;
 
-  const oscillators = {};
+  const notes = {};
 
   console.log('localStorage.getItem(statistics):', JSON.parse(localStorage.getItem('statistics')));
 
@@ -44,16 +44,24 @@ function afterFirstUserAction() {
   }
 
   function addOscillator(keyCode, noteNumber) {
-    oscillators[keyCode] = audioCtx.createOscillator();
-    oscillators[keyCode].frequency.setValueAtTime(frequencyFromNoteNumber(noteNumber), audioCtx.currentTime);
-    oscillators[keyCode].type = "square";
-    oscillators[keyCode].connect(volumeNode);
-    oscillators[keyCode].start();
+    const note = {};
+    note.oscillatorNode = audioCtx.createOscillator();
+    note.oscillatorNode.frequency.setValueAtTime(frequencyFromNoteNumber(noteNumber), audioCtx.currentTime);
+    note.oscillatorNode.type = "square";
+
+    note.gainNode = audioCtx.createGain();
+
+    note.oscillatorNode.connect(note.gainNode);
+    note.gainNode.connect(volumeNode);
+
+    note.oscillatorNode.start();
+    note.gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 1);
+
+    notes[keyCode] = note;
   }
 
   function removeOscillator(keyCode) {
-    oscillators[keyCode].disconnect(volumeNode);
-    oscillators[keyCode] = null;
+    notes[keyCode].oscillatorNode.stop();
   }
 
 
