@@ -3,17 +3,38 @@
   <head>
     <title>keyboard synthesizer</title>
     <script src="script.js" type="module"></script>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <div>Type something!</div>
-    <div>
-      <input type="range" id="volumeSlider" min="0" max="100" value="100">
-      <select id="timbreSelect">
-        <option value="square">square</option>
-        <option value="sine">sine</option>
-        <option value="sawtooth">sawtooth</option>
-        <option value="triangle">triangle</option>
-      </select>
-    </div>
+    <main>
+      <h1 class="mb">
+        Type something!
+      </h1>
+      <div class="setting mb">
+        <div>
+          <label for="timbreSelect">
+            Volume:
+          </label>
+        </div>
+        <div>
+          <input type="range" id="volumeSlider" min="0" max="100" value="100">
+        </div>
+      </div>
+      <div class="setting">
+        <div>
+          <label for="timbreSelect">
+            Timbre:
+          </label>
+        </div>
+        <div>
+          <select id="timbreSelect">
+            <option value="square">square</option>
+            <option value="sine">sine</option>
+            <option value="sawtooth">sawtooth</option>
+            <option value="triangle">triangle</option>
+          </select>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

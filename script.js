@@ -44,13 +44,22 @@ function afterFirstUserAction() {
     return 440 * 2**(noteNumber / 12);
   }
 
+  const gainBalanceFactors = {
+    square: 1,
+    sine: 3,
+    sawtooth: 1.3,
+    triangle: 5,
+  }
   function addOscillator(keyCode, noteNumber) {
+    const oscillatorType = timbreSelect.value;
+    
     const note = {};
     note.oscillatorNode = audioCtx.createOscillator();
     note.oscillatorNode.frequency.setValueAtTime(frequencyFromNoteNumber(noteNumber), audioCtx.currentTime);
-    note.oscillatorNode.type = timbreSelect.value;
+    note.oscillatorNode.type = oscillatorType;
 
     note.gainNode = audioCtx.createGain();
+    note.gainNode.gain.value = gainBalanceFactors[oscillatorType];
 
     note.oscillatorNode.connect(note.gainNode);
     note.gainNode.connect(volumeNode);
