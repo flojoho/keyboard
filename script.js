@@ -100,10 +100,10 @@ function afterFirstUserAction() {
     
     if(['ArrowLeft', 'ArrowRight'].includes(e.code)) {
       if(e.code === 'ArrowLeft') {
-        transposeDown();
+        transposeUp();
       }
       if(e.code === 'ArrowRight') {
-        transposeUp();
+        transposeDown();
       }
       return;
     }
