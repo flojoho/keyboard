@@ -2,7 +2,7 @@ import { noteNumberFromKey, transposeUp, transposeDown } from './KeyMapping.js';
 
 function afterFirstUserAction() {
 
-  const maxGain = 0.15;
+  const maxGain = 0.2;
 
   const notes = {};
 
@@ -46,9 +46,9 @@ function afterFirstUserAction() {
 
   const gainBalanceFactors = {
     square: 1,
-    sine: 3,
-    sawtooth: 1.3,
-    triangle: 5,
+    sawtooth: 1.5,
+    triangle: 2.5,
+    sine: 2
   }
   function addOscillator(keyCode, noteNumber) {
     const oscillatorType = timbreSelect.value;
@@ -65,7 +65,7 @@ function afterFirstUserAction() {
     note.gainNode.connect(volumeNode);
 
     note.oscillatorNode.start();
-    note.gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 1);
+    note.gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 1.5);
 
     notes[keyCode] = note;
   }
