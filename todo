@@ -1,0 +1,152 @@
+
+todo
+  r: read Web Audio API documentation
+  r: web audio api garbage collectionx
+
+
+
+
+INBOX
+feature for saving synth settings
+midi support
+recording feature
+should i use a framework? (zb react, pro/con)
+add quarterstep transpose feature / intonation slider (for offtune recordings)
+show youtube video of me playing a song (readme + index.html)
+beschreibung/erklärung adden (ua tastenzuweisungen)
+readme verbessern
+
+
+
+
+
+
+CONCEPT / DECISIONS
+
+easier way to transpose? (zb press key to set as 440Hz)
+
+save timbre setting in localStorage?
+
+make decay adjustable? (also gets saved in localstorage (also tracked?))
+
+tech: extract localStorage (load/save) logic into own module?
+
+tech: move oscillator logic to own module?
+
+add (optional) reverb with settings?
+
+interactive visual ADSR envelope
+
+
+
+
+
+
+
+TODOS
+
+easier way to change timbre (space bar)
+
+volume should be adjustable with left hand
+
+remove clicking sound
+
+set max volume higher
+
+also track transpose setting and noteNumbers (localStorage.statistics)
+  increment count with every note played
+
+create multitouch buttons layout for mobile devices (later add pitch slide feature)
+
+
+
+
+
+
+maybe dont make noteNumberFromKey() return integers including 0 because it's falsy to the outside code
+
+clean up key event listeners
+
+upper and lower limit for transpose feature
+
+modularize localStorage
+  pos: just use regular localStorageAPI for now and modularize later?
+  pos: just load/save an entire object?
+  pos: api:
+    loadVolume()
+    saveVolume()
+    loadTranspose()
+    saveTranspose()
+
+modularize keycode to noteNumber mapping data structure
+  volume slider should be correctly set from the start
+
+better solution for obligatory user input problem
+
+add drum sounds?
+
+recording functionality
+  later also several track + overlaying them
+
+
+committing this todo file vs keeping it in gitignore
+  pro/con
+splitting if up into multiple files?
+  and put them into own folder? (and gitignore the entire folder)
+
+
+
+
+later: include a link to a youtube video explaining the synthesizer or at least the github link
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+state
+  key => noteNum
+  transposeOffset
+API
+  noteNumber.fromKey()
+  tranposeOneSemitoneUp()
+  transposeOneSemitoneDown()
+
+
+state
+  volume
+  audioContext
+  oscillators
+API
+  increaseVolume()
+  decreaseVolume()
+  getVolume()?
+  startNote(keyCode)
+  stopNote()
+  stopAllSound()
+  changeSound() / setSound()
+
+
+
+
+
+
+
+
+
+localStorage:
+{
+  volume: 0.56,
+  statistics
+  keyMappings
+  customSynths
+}
