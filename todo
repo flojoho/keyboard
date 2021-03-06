@@ -45,11 +45,9 @@ interactive visual ADSR envelope
 
 TODOS
 
-easier way to change timbre (space bar)
-
 remove clicking sound
 
-set max volume higher
+track volume setting together with selected sound
 
 also track transpose setting and noteNumbers (localStorage.statistics)
   increment count with every note played
@@ -59,11 +57,6 @@ create multitouch buttons layout for mobile devices (later add pitch slide featu
 readme:
   what is it
   you can also set the volume by using the Ctrl/Alt keys and change the sound easily with the space bar
-
-
-
-
-
 
 maybe dont make noteNumberFromKey() return integers including 0 because it's falsy to the outside code
 
