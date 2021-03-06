@@ -48,6 +48,7 @@ TODOS
 easier way to change timbre (space bar)
 
 volume should be adjustable with left hand
+  r: figure out what keys are possible on windows (shouldn't contain the windows key)
 
 remove clicking sound
 
