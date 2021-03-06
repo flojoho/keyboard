@@ -1,5 +1,8 @@
 import { noteNumberFromKey, transposeUp, transposeDown } from './KeyMapping.js';
 
+const volumeSlider = document.getElementById('volumeSlider');
+const timbreSelect = document.getElementById('timbreSelect');
+
 function afterFirstUserAction() {
 
   const maxGain = 0.2;
@@ -13,9 +16,6 @@ function afterFirstUserAction() {
   const volumeNode = audioCtx.createGain();
   volumeNode.gain.value = maxGain;
   volumeNode.connect(audioCtx.destination);
-
-  const volumeSlider = document.getElementById('volumeSlider');
-  const timbreSelect = document.getElementById('timbreSelect');
 
   function saveStatistics(data) {
     let statistics = JSON.parse(localStorage.getItem('statistics'));
@@ -88,6 +88,14 @@ function afterFirstUserAction() {
     removeOscillator(keyCode, noteNumber);
   }
 
+  function changeTimbre() {
+    if(timbreSelect.selectedIndex === timbreSelect.length - 1) {
+      timbreSelect.selectedIndex = 0;
+      return;
+    }
+    timbreSelect.selectedIndex++;
+  }
+
   //**************************** EVENT HANDLING ************************
   document.addEventListener('keydown', e => {
     if(['AltLeft', 'ControlLeft'].includes(e.code)) {
@@ -115,6 +123,10 @@ function afterFirstUserAction() {
         transposeDown();
       }
       return;
+    }
+
+    if(e.code === 'Space') {
+      changeTimbre();
     }
     
     const noteNumber = noteNumberFromKey(e.code);
