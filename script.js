@@ -90,12 +90,12 @@ function afterFirstUserAction() {
 
   //**************************** EVENT HANDLING ************************
   document.addEventListener('keydown', e => {
-    if(['ArrowUp', 'ArrowDown'].includes(e.code)) {
+    if(['AltLeft', 'ControlLeft'].includes(e.code)) {
       const prevVolume = volumeSlider.value;
       let nextVolume;
-      if (e.code === 'ArrowUp') {
+      if (e.code === 'AltLeft') {
         nextVolume = parseInt(prevVolume) + 5;
-      } else if (e.code === 'ArrowDown') {
+      } else if (e.code === 'ControlLeft') {
         nextVolume = prevVolume - 5;
       }
       

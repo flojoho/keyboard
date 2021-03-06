@@ -47,9 +47,6 @@ TODOS
 
 easier way to change timbre (space bar)
 
-volume should be adjustable with left hand
-  r: figure out what keys are possible on windows (shouldn't contain the windows key)
-
 remove clicking sound
 
 set max volume higher
@@ -58,6 +55,10 @@ also track transpose setting and noteNumbers (localStorage.statistics)
   increment count with every note played
 
 create multitouch buttons layout for mobile devices (later add pitch slide feature)
+
+readme:
+  what is it
+  you can also set the volume by using the Ctrl/Alt keys and change the sound easily with the space bar
 
 
 
