@@ -17,23 +17,23 @@ INBOX
 
 CONCEPT / DECISIONS
 
-easier way to transpose? (zb press key to set as 440Hz)
-
-save timbre setting in localStorage?
-
-make decay adjustable? (also gets saved in localstorage (also tracked?))
+what data do i want to track and what do i want to do with it?
+  save timbre setting in localStorage?
 
 tech: extract localStorage (load/save) logic into own module?
 
 tech: move oscillator logic to own module?
 
-add (optional) reverb with settings?
-
-interactive visual ADSR envelope
+easier way to transpose? (zb press key to set as 440Hz)
 
 add drum sounds?
 
 tech: should i use a framework? (zb react, pro/con)
+
+make decay adjustable? (also gets saved in localstorage (also tracked?))
+interactive visual ADSR envelope?
+
+add (optional) reverb with settings?
 
 
 
