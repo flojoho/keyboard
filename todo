@@ -7,14 +7,8 @@ todo
 
 
 INBOX
-feature for saving synth settings
-midi support
-recording feature
-should i use a framework? (zb react, pro/con)
-add quarterstep transpose feature / intonation slider (for offtune recordings)
-show youtube video of me playing a song (readme + index.html)
-beschreibung/erklärung adden (ua tastenzuweisungen)
-readme verbessern
+
+
 
 
 
@@ -37,6 +31,10 @@ add (optional) reverb with settings?
 
 interactive visual ADSR envelope
 
+add drum sounds?
+
+tech: should i use a framework? (zb react, pro/con)
+
 
 
 
@@ -45,7 +43,10 @@ interactive visual ADSR envelope
 
 TODOS
 
-remove clicking sound
+tech: better solution for obligatory user input problem
+bug: volume slider should be correctly set from the start
+
+bug: remove clicking sound
 
 track volume setting together with selected sound
 
@@ -54,47 +55,47 @@ also track transpose setting and noteNumbers (localStorage.statistics)
 
 create multitouch buttons layout for mobile devices (later add pitch slide feature)
 
+beschreibung/erklärung adden (html)(ua tastenzuweisungen)
 readme:
   what is it
   you can also set the volume by using the Ctrl/Alt keys and change the sound easily with the space bar
 
-maybe dont make noteNumberFromKey() return integers including 0 because it's falsy to the outside code
+add quarterstep transpose feature / intonation slider (for offtune recordings)
 
-clean up key event listeners
+
+
+
+
+tech: clean up key event listeners
 
 upper and lower limit for transpose feature
 
-modularize localStorage
-  pos: just use regular localStorageAPI for now and modularize later?
-  pos: just load/save an entire object?
-  pos: api:
+tech: modularize localStorage
+  opt: just use regular localStorageAPI for now and modularize later?
+  opt: just load/save an entire object?
+  opt: api:
     loadVolume()
     saveVolume()
     loadTranspose()
     saveTranspose()
 
-modularize keycode to noteNumber mapping data structure
-  volume slider should be correctly set from the start
+tech: maybe dont make noteNumberFromKey() return integers including 0 because it's falsy to the outside code
 
-better solution for obligatory user input problem
 
-add drum sounds?
+
+
 
 recording functionality
   later also several track + overlaying them
 
+include a link to a youtube video explaining the synthesizer or at least the github link
+show youtube video of me playing a song (readme + index.html)
 
-committing this todo file vs keeping it in gitignore
-  pro/con
-splitting if up into multiple files?
-  and put them into own folder? (and gitignore the entire folder)
+feature for saving synth settings
 
+midi support
 
-
-
-later: include a link to a youtube video explaining the synthesizer or at least the github link
-
-
+recording feature
 
 
 
