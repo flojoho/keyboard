@@ -6,7 +6,7 @@ Synthesizer that runs in the browser and can be played using the computer keyboa
 
 ## Keyboard Shortcuts:
 
-Ctrl: decrease volume
-Alt: increase volume
-Space: change sound
-Right/Left Arrow Keys: transpose one semitone up/down
+* Ctrl: decrease volume
+* Alt: increase volume
+* Space: change sound
+* Right/Left Arrow Keys: transpose one semitone up/down
