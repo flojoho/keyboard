@@ -1,14 +1,18 @@
 
-todo
-  r: read Web Audio API documentation
-  r: web audio api garbage collectionx
-
-
 
 
 INBOX
+also show description/explanation (readme) in app? (ua tastenzuweisungen)
 
 
+
+
+
+
+RESEARCH
+Web Audio API
+web audio api garbage collection
+web midi api
 
 
 
@@ -16,6 +20,8 @@ INBOX
 
 
 CONCEPT / DECISIONS
+
+create multitouch buttons layout for mobile devices (later add pitch slide feature)
 
 what data do i want to track and what do i want to do with it?
   save timbre setting in localStorage?
@@ -43,6 +49,8 @@ add (optional) reverb with settings?
 
 TODOS
 
+midi support
+
 tech: better solution for obligatory user input problem
 bug: volume slider should be correctly set from the start
 
@@ -52,13 +60,6 @@ track volume setting together with selected sound
 
 also track transpose setting and noteNumbers (localStorage.statistics)
   increment count with every note played
-
-create multitouch buttons layout for mobile devices (later add pitch slide feature)
-
-beschreibung/erklärung adden (html)(ua tastenzuweisungen)
-readme:
-  what is it
-  you can also set the volume by using the Ctrl/Alt keys and change the sound easily with the space bar
 
 add quarterstep transpose feature / intonation slider (for offtune recordings)
 
@@ -92,8 +93,6 @@ include a link to a youtube video explaining the synthesizer or at least the git
 show youtube video of me playing a song (readme + index.html)
 
 feature for saving synth settings
-
-midi support
 
 recording feature
 
