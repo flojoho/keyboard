@@ -1,8 +1,21 @@
 
 
 
+
 INBOX
+
 also show description/explanation (readme) in app? (ua tastenzuweisungen)
+
+add my new left hand key layout (to be able to easily use arrow keys with my right hand)
+  also add select for different keyboard layouts?
+    if yes: specify the data abstraction for different key layouts
+
+reset statistics (or at least the ones that don't make sense anymore)
+
+
+
+
+
 
 
 
@@ -10,9 +23,16 @@ also show description/explanation (readme) in app? (ua tastenzuweisungen)
 
 
 RESEARCH
+
 Web Audio API
+
 web audio api garbage collection
+
 web midi api
+
+
+
+
 
 
 
@@ -47,6 +67,8 @@ add (optional) reverb with settings?
 
 
 
+
+
 TODOS
 
 midi support
@@ -65,8 +87,6 @@ add quarterstep transpose feature / intonation slider (for offtune recordings)
 
 
 
-
-
 tech: clean up key event listeners
 
 upper and lower limit for transpose feature
@@ -81,8 +101,6 @@ tech: modularize localStorage
     saveTranspose()
 
 tech: maybe dont make noteNumberFromKey() return integers including 0 because it's falsy to the outside code
-
-
 
 
 
@@ -145,3 +163,5 @@ localStorage:
   keyMappings
   customSynths
 }
+
+
