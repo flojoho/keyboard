@@ -2,64 +2,16 @@
 
 
 
+
 INBOX
 
 also show description/explanation (readme) in app? (ua tastenzuweisungen)
-
-add my new left hand key layout (to be able to easily use arrow keys with my right hand)
-  also add select for different keyboard layouts?
-    if yes: specify the data abstraction for different key layouts
 
 reset statistics (or at least the ones that don't make sense anymore)
 
 
 
 
-
-
-
-
-
-
-
-RESEARCH
-
-Web Audio API
-
-web audio api garbage collection
-
-web midi api
-
-
-
-
-
-
-
-
-
-
-CONCEPT / DECISIONS
-
-create multitouch buttons layout for mobile devices (later add pitch slide feature)
-
-what data do i want to track and what do i want to do with it?
-  save timbre setting in localStorage?
-
-tech: extract localStorage (load/save) logic into own module?
-
-tech: move oscillator logic to own module?
-
-easier way to transpose? (zb press key to set as 440Hz)
-
-add drum sounds?
-
-tech: should i use a framework? (zb react, pro/con)
-
-make decay adjustable? (also gets saved in localstorage (also tracked?))
-interactive visual ADSR envelope?
-
-add (optional) reverb with settings?
 
 
 
@@ -113,6 +65,22 @@ show youtube video of me playing a song (readme + index.html)
 feature for saving synth settings
 
 recording feature
+
+
+
+
+
+
+
+
+
+RESEARCH
+
+Web Audio API
+
+web audio api garbage collection
+
+web midi api
 
 
 
