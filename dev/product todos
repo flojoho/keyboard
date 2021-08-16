@@ -5,13 +5,7 @@
 
 INBOX
 
-add select for different keyboard layouts? (left hand layout, right hand layout, ...)
-  if yes: specify the data abstraction for different key layouts
-
 create multitouch buttons layout for mobile devices (later add pitch slide feature)
-
-what data do i want to track and what do i want to do with it?
-  save timbre setting in localStorage?
 
 tech: extract localStorage (load/save) logic into own module?
 
@@ -27,6 +21,27 @@ make decay adjustable? (also gets saved in localstorage (also tracked?))
 interactive visual ADSR envelope?
 
 add (optional) reverb with settings?
+
+
+
+
+
+
+
+
+
+add select for different keyboard layouts? (left hand layout, right hand layout, ...)
+  if yes: specify the data abstraction for different key layouts
+
+more sounds? build my own synthesizer?
+
+
+
+what data do i want to track and what do i want to do with it?
+  save timbre setting in localStorage?
+what should the data structure look like? (also the data tracking api/interface)
+
+
 
 
 
