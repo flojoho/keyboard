@@ -1,7 +1,8 @@
-import { noteNumberFromKey, transposeUp, transposeDown } from './KeyMapping.js';
+import { noteNumberFromKey, transposeUp, transposeDown, changeLayout } from './KeyMapping.js';
 
 const volumeSlider = document.getElementById('volumeSlider');
 const timbreSelect = document.getElementById('timbreSelect');
+const layoutSelect = document.getElementById('layoutSelect');
 
 function afterFirstUserAction() {
 
@@ -156,3 +157,7 @@ function afterFirstUserAction() {
 }
 
 document.addEventListener('keydown', afterFirstUserAction);
+
+layoutSelect.addEventListener('change', () => {
+  changeLayout(layoutSelect.value);
+});

@@ -1,7 +1,6 @@
 const intervalBetweenRows = 5;
 
 let offset = parseInt(localStorage.getItem('offset') || '0');
-const defaultOffset = -18;
 
 const keyboardRows = [
   [undefined, "Backquote", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal", "Backspace"],
@@ -10,23 +9,28 @@ const keyboardRows = [
   ["ShiftLeft", "IntlBackslash", "KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Comma", "Period", "Slash", "ShiftRight", undefined, undefined]
 ];
 
-const defaultMapping = {};
+const rightHandMapping = {};
+keyboardRows.reverse().forEach((row, rowNum) => {
+  row.forEach((keyCode, index) => {
+    if(!keyCode) return;
+    rightHandMapping[keyCode] = rowNum * intervalBetweenRows + index - 25;
+  });
+});
 
-if(true) { // new experimental left hand key mapping
-  keyboardRows.reverse().forEach((row, rowNum) => {
-    row.forEach((keyCode, index) => {
-      if(!keyCode) return;
-      defaultMapping[keyCode] = rowNum * 5 - index - 10;
-    });
+const leftHandMapping = {};
+keyboardRows.forEach((row, rowNum) => {
+  row.forEach((keyCode, index) => {
+    if(!keyCode) return;
+    leftHandMapping[keyCode] = rowNum * 5 - index - 10;
   });
-} else {
-  keyboardRows.reverse().forEach((row, rowNum) => {
-    row.forEach((keyCode, index) => {
-      if(!keyCode) return;
-      defaultMapping[keyCode] = rowNum * intervalBetweenRows + index + defaultOffset;
-    });
-  });
-}
+});
+
+const keyboardLayouts = {
+  righthand: rightHandMapping,
+  lefthand: leftHandMapping
+};
+
+let activeMapping = keyboardLayouts['righthand'];
 
 export const transposeUp = () => {
   offset += 1;
@@ -41,7 +45,12 @@ export const transposeDown = () => {
 export const noteNumberFromKey = keyCode => {
   if(!typeof keyCode === 'string') throw new Error('keyCode must be a string');
 
-  const noteNumber = defaultMapping[keyCode];
+  const noteNumber = activeMapping[keyCode];
   if(!Number.isInteger(noteNumber)) return null;
   return noteNumber + offset;
+}
+
+export const changeLayout = name => {
+  if(!typeof name === 'string') throw new Error('name must be a string');
+  activeMapping = keyboardLayouts[name] || keyboardLayouts['righthand'];
 }

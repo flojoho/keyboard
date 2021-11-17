@@ -2,7 +2,6 @@
 
 
 
-
 INBOX
 
 create multitouch buttons layout for mobile devices (later add pitch slide feature)
@@ -21,6 +20,11 @@ make decay adjustable? (also gets saved in localstorage (also tracked?))
 interactive visual ADSR envelope?
 
 add (optional) reverb with settings?
+
+save and load separate offset values for right hand layout and left hand layout?
+
+
+
 
 
 
