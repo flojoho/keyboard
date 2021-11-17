@@ -8,6 +8,12 @@ also show description/explanation (readme) in app? (ua tastenzuweisungen)
 
 reset statistics (or at least the ones that don't make sense anymore)
 
+tech: should i use a framework? (zb react, pro/con)
+
+tech: extract localStorage (load/save) logic into own module?
+
+tech: move oscillator logic to own module?
+
 
 
 

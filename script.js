@@ -81,7 +81,10 @@ function afterFirstUserAction() {
   function keyGotPressed(keyCode) {
     const noteNumber = noteNumberFromKey(keyCode);
     addOscillator(keyCode, noteNumber);
-    saveStatistics({ volume: volumeSlider.value });
+    saveStatistics({
+      volume: volumeSlider.value,
+      noteNumber: noteNumber
+    });
   }
 
   function keyGotReleased(keyCode) {

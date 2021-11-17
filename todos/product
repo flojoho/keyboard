@@ -4,17 +4,9 @@
 
 INBOX
 
-create multitouch buttons layout for mobile devices (later add pitch slide feature)
-
-tech: extract localStorage (load/save) logic into own module?
-
-tech: move oscillator logic to own module?
-
 easier way to transpose? (zb press key to set as 440Hz)
 
 add drum sounds?
-
-tech: should i use a framework? (zb react, pro/con)
 
 make decay adjustable? (also gets saved in localstorage (also tracked?))
 interactive visual ADSR envelope?
@@ -33,17 +25,17 @@ save and load separate offset values for right hand layout and left hand layout?
 
 
 
-
-add select for different keyboard layouts? (left hand layout, right hand layout, ...)
-  if yes: specify the data abstraction for different key layouts
-
-more sounds? build my own synthesizer?
-
-
+create multitouch buttons layout for mobile devices (later add pitch slide feature)
 
 what data do i want to track and what do i want to do with it?
   save timbre setting in localStorage?
 what should the data structure look like? (also the data tracking api/interface)
+
+save and load chosen keyboard layout
+
+
+
+more sounds? build my own synthesizer?
 
 
 
