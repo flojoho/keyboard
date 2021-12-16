@@ -8,9 +8,6 @@ easier way to transpose? (zb press key to set as 440Hz)
 
 add drum sounds?
 
-make decay adjustable? (also gets saved in localstorage (also tracked?))
-interactive visual ADSR envelope?
-
 add (optional) reverb with settings?
 
 save and load separate offset values for right hand layout and left hand layout?
@@ -26,6 +23,11 @@ save and load separate offset values for right hand layout and left hand layout?
 
 
 create multitouch buttons layout for mobile devices (later add pitch slide feature)
+  req: dec: how many buttons per row? how many rows?
+  add buttons for semitone transposition
+make it functional on mobile devices
+
+
 
 what data do i want to track and what do i want to do with it?
   save timbre setting in localStorage?
@@ -33,9 +35,10 @@ what should the data structure look like? (also the data tracking api/interface)
 
 save and load chosen keyboard layout
 
-
-
 more sounds? build my own synthesizer?
+
+make decay adjustable? (also gets saved in localstorage (also tracked?))
+interactive visual ADSR envelope?
 
 
 
@@ -54,10 +57,13 @@ concept
 
 decisions
 
-product planning
+product / product planning
 
 design
 
 project
 
+problems
+
+UX, user experience
 
