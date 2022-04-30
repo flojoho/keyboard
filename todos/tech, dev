@@ -4,8 +4,6 @@
 
 INBOX
 
-also show description/explanation (readme) in app? (ua tastenzuweisungen)
-
 reset statistics (or at least the ones that don't make sense anymore)
 
 tech: should i use a framework? (zb react, pro/con)
@@ -28,25 +26,14 @@ tech: move oscillator logic to own module?
 
 TODOS
 
-midi support
+refactoring: put everything sound related in its own 'audio context' class/IIFE
 
 tech: better solution for obligatory user input problem
 bug: volume slider should be correctly set from the start
 
-bug: remove clicking sound
-
-track volume setting together with selected sound
-
-also track transpose setting and noteNumbers (localStorage.statistics)
-  increment count with every note played
-
-add quarterstep transpose feature / intonation slider (for offtune recordings)
-
 
 
 tech: clean up key event listeners
-
-upper and lower limit for transpose feature
 
 tech: modularize localStorage
   opt: just use regular localStorageAPI for now and modularize later?
@@ -61,82 +48,6 @@ tech: maybe dont make noteNumberFromKey() return integers including 0 because it
 
 
 
-recording functionality
-  later also several track + overlaying them
 
-include a link to a youtube video explaining the synthesizer or at least the github link
-show youtube video of me playing a song (readme + index.html)
-
-feature for saving synth settings
-
-recording feature
-
-
-
-
-
-
-
-
-
-
-
-RESEARCH
-
-Web Audio API
-
-web audio api garbage collection
-
-web midi api
-
-
-
-
-
-
-
-
-
-
-
-
-
-state
-  key => noteNum
-  transposeOffset
-API
-  noteNumber.fromKey()
-  tranposeOneSemitoneUp()
-  transposeOneSemitoneDown()
-
-
-state
-  volume
-  audioContext
-  oscillators
-API
-  increaseVolume()
-  decreaseVolume()
-  getVolume()?
-  startNote(keyCode)
-  stopNote()
-  stopAllSound()
-  changeSound() / setSound()
-
-
-
-
-
-
-
-
-
-localStorage:
-{
-  volume: 0.56,
-  statistics
-  keyMappings
-  customSynths
-}
 
 

@@ -4,13 +4,40 @@ const volumeSlider = document.getElementById('volumeSlider');
 const timbreSelect = document.getElementById('timbreSelect');
 const layoutSelect = document.getElementById('layoutSelect');
 
+const Context = () => {
+  let audioContext = null;
+
+  const ensureSetup = () => {
+    if(!audioContext) {
+      // ...
+    }
+  }
+  
+  return {
+    startNote(keyCode) {
+      ensureSetup();
+
+    },
+    stopNote(keyCode) {
+      ensureSetup();
+
+    },
+    stopAllNotes() {
+      ensureSetup();
+
+    },
+    setGain() {
+      ensureSetup();
+
+    }
+  }
+}
+
 function afterFirstUserAction(firstKeyEvent) {
 
   const maxGain = 0.2;
 
   const notes = {};
-
-  console.log('localStorage.getItem(statistics):', JSON.parse(localStorage.getItem('statistics')));
 
   const audioCtx = new AudioContext();
 
@@ -18,7 +45,7 @@ function afterFirstUserAction(firstKeyEvent) {
   volumeNode.gain.value = maxGain;
   volumeNode.connect(audioCtx.destination);
 
-  function saveStatistics(data) {
+  function incrementStatistics(data) {
     let statistics = JSON.parse(localStorage.getItem('statistics'));
     if(typeof statistics !== 'object' || statistics === null) statistics = {};
 
@@ -30,12 +57,12 @@ function afterFirstUserAction(firstKeyEvent) {
     localStorage.setItem('statistics', JSON.stringify(statistics));
   }
 
-  function changeVolume(percentage) { //todo: should i use a number between 0 and 1 instead of percentages?
+  function changeVolume(percentage) { // TODO: should i use a number between 0 and 1 instead of percentages?
     volumeNode.gain.value = percentage / 100 * maxGain;
     localStorage.setItem('volume', percentage);
   }
 
-  if(localStorage.getItem('volume')) { //todo: improve this isset-function
+  if(localStorage.getItem('volume')) { // TODO: improve this isset-function
     const volume = localStorage.getItem('volume');
     volumeSlider.value = volume;
     changeVolume(volume);
@@ -76,18 +103,18 @@ function afterFirstUserAction(firstKeyEvent) {
   }
 
 
-  const keyPressed = {};
+  const pressedKeys = {};
 
-  function keyGotPressed(keyCode) {
+  function noteKeyGotPressed(keyCode) {
     const noteNumber = noteNumberFromKey(keyCode);
     addOscillator(keyCode, noteNumber);
-    saveStatistics({
+    incrementStatistics({
       volume: volumeSlider.value,
       noteNumber: noteNumber
     });
   }
 
-  function keyGotReleased(keyCode) {
+  function noteKeyGotReleased(keyCode) {
     const noteNumber = noteNumberFromKey(keyCode);
     removeOscillator(keyCode, noteNumber);
   }
@@ -136,9 +163,9 @@ function afterFirstUserAction(firstKeyEvent) {
     const noteNumber = noteNumberFromKey(e.code);
     if(!Number.isInteger(noteNumber)) return;
 
-    if(keyPressed[e.code] !== true) {
-      keyPressed[e.code] = true;
-      keyGotPressed(e.code);
+    if(pressedKeys[e.code] !== true) {
+      pressedKeys[e.code] = true;
+      noteKeyGotPressed(e.code);
     }
   }
 
@@ -148,9 +175,9 @@ function afterFirstUserAction(firstKeyEvent) {
     const noteNumber = noteNumberFromKey(e.code);
     if(!Number.isInteger(noteNumber)) return;
 
-    if(keyPressed[e.code] !== false) {
-      keyPressed[e.code] = false;
-      keyGotReleased(e.code);
+    if(pressedKeys[e.code] !== false) {
+      pressedKeys[e.code] = false;
+      noteKeyGotReleased(e.code);
     }
   });
 

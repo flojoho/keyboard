@@ -12,6 +12,34 @@ add (optional) reverb with settings?
 
 save and load separate offset values for right hand layout and left hand layout?
 
+add quarterstep transpose feature / intonation slider (for offtune recordings)
+
+also show description/explanation (readme) in app? (ua tastenzuweisungen)
+
+midi support
+
+bug: remove clicking sound
+
+track volume setting together with selected sound
+
+also track transpose setting and noteNumbers (localStorage.statistics)
+  increment count with every note played
+
+display tracked numbers somewhere?
+
+upper and lower limit for transpose feature?
+
+recording functionality
+  later also several track + overlaying them
+
+include a link to a youtube video explaining the synthesizer or at least the github link
+show youtube video of me playing a song (readme + index.html)
+
+feature for saving synth settings
+
+recording feature
+
+
 
 
 
@@ -75,4 +103,75 @@ project
 problems
 
 UX, user experience
+
+
+
+
+
+
+
+
+
+
+
+
+
+RESEARCH
+
+Web Audio API
+
+web audio api garbage collection
+
+web midi api
+
+
+
+
+
+
+
+
+
+
+
+
+
+state
+  key => noteNum
+  transposeOffset
+API
+  noteNumber.fromKey()
+  tranposeOneSemitoneUp()
+  transposeOneSemitoneDown()
+
+
+state
+  volume
+  audioContext
+  oscillators
+API
+  increaseVolume()
+  decreaseVolume()
+  getVolume()?
+  startNote(keyCode)
+  stopNote()
+  stopAllSound()
+  changeSound() / setSound()
+
+
+
+
+
+
+
+
+
+localStorage:
+{
+  volume: 0.56,
+  statistics
+  keyMappings
+  customSynths
+}
+
 
