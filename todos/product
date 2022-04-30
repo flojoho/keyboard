@@ -22,10 +22,19 @@ save and load separate offset values for right hand layout and left hand layout?
 
 
 
+TODO / PRIO
+
 create multitouch buttons layout for mobile devices (later add pitch slide feature)
   req: dec: how many buttons per row? how many rows?
   add buttons for semitone transposition
 make it functional on mobile devices
+
+make the notes fade in and out more softly (basic fixed ADSR)
+
+add plus and minus buttons to the volume slider?
+  on either side of the slider vs on one side right next to each other
+
+bug: make the volume slider already show the correct volume when entering the page, not only after pressing the first key
 
 
 

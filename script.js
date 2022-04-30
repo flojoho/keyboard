@@ -4,7 +4,7 @@ const volumeSlider = document.getElementById('volumeSlider');
 const timbreSelect = document.getElementById('timbreSelect');
 const layoutSelect = document.getElementById('layoutSelect');
 
-function afterFirstUserAction() {
+function afterFirstUserAction(firstKeyEvent) {
 
   const maxGain = 0.2;
 
@@ -101,7 +101,7 @@ function afterFirstUserAction() {
   }
 
   //**************************** EVENT HANDLING ************************
-  document.addEventListener('keydown', e => {
+  const onKeyDown = e => {
     if(['ArrowUp', 'ArrowDown'].includes(e.code)) {
       const prevVolume = volumeSlider.value;
       let nextVolume;
@@ -140,7 +140,9 @@ function afterFirstUserAction() {
       keyPressed[e.code] = true;
       keyGotPressed(e.code);
     }
-  });
+  }
+
+  document.addEventListener('keydown', onKeyDown);
 
   document.addEventListener('keyup', e => {
     const noteNumber = noteNumberFromKey(e.code);
@@ -156,6 +158,7 @@ function afterFirstUserAction() {
     changeVolume(volumeSlider.value);
   });
   
+  onKeyDown(firstKeyEvent);
   document.removeEventListener('keydown', afterFirstUserAction);
 }
 
