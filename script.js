@@ -1,4 +1,5 @@
 import { noteNumberFromKey, transposeUp, transposeDown, changeLayout } from './KeyMapping.js';
+import settings from './settings.js';
 
 const volumeSlider = document.getElementById('volumeSlider');
 const timbreSelect = document.getElementById('timbreSelect');
@@ -59,11 +60,11 @@ function afterFirstUserAction(firstKeyEvent) {
 
   function changeVolume(percentage) { // TODO: should i use a number between 0 and 1 instead of percentages?
     volumeNode.gain.value = percentage / 100 * maxGain;
-    localStorage.setItem('volume', percentage);
+    settings.set('volume', percentage);
   }
 
-  if(localStorage.getItem('volume')) { // TODO: improve this isset-function
-    const volume = localStorage.getItem('volume');
+  if(settings.get('volume')) { // TODO: improve this isset-function
+    const volume = settings.get('volume');
     volumeSlider.value = volume;
     changeVolume(volume);
   }

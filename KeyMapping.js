@@ -1,6 +1,6 @@
-const intervalBetweenRows = 5;
+import settings from './settings.js';
 
-let offset = parseInt(localStorage.getItem('offset') || '0');
+const intervalBetweenRows = 5;
 
 const keyboardRows = [
   [undefined, "Backquote", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal", "Backspace"],
@@ -33,13 +33,13 @@ const keyboardLayouts = {
 let activeMapping = keyboardLayouts['righthand'];
 
 export const transposeUp = () => {
-  offset += 1;
-  localStorage.setItem('offset', offset);
+  const transposeOffset = settings.get('transposeOffset');
+  settings.set('transposeOffset', transposeOffset + 1);
 };
 
 export const transposeDown = () => {
-  offset -= 1;
-  localStorage.setItem('offset', offset);
+  const transposeOffset = settings.get('transposeOffset');
+  settings.set('transposeOffset', transposeOffset - 1);
 };
 
 export const noteNumberFromKey = keyCode => {
@@ -47,7 +47,7 @@ export const noteNumberFromKey = keyCode => {
 
   const noteNumber = activeMapping[keyCode];
   if(!Number.isInteger(noteNumber)) return null;
-  return noteNumber + offset;
+  return noteNumber + settings.get('transposeOffset');
 }
 
 export const changeLayout = name => {
