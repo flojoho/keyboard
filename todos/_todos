@@ -47,7 +47,7 @@ feature for saving synth settings
 TODO / PRIO
 
 create multitouch buttons layout for mobile devices (later add pitch slide feature)
-  dec: how many buttons per row? how many rows?
+  how to draw the buttons? css? svg?
   how to fill the screen with note buttons? (also root note should be in the center)
   r: multitouch
 make it functional on mobile devices
@@ -59,6 +59,8 @@ dec: use react?
   con:
     no react router support
     deploying to github pages more complicated
+
+save timbre setting in localStorage
 
 tech: separate UI from sound synthesis
 
@@ -73,16 +75,6 @@ tech: better solution for obligatory user input problem
 bug: volume slider should be correctly set from the start
 
 tech: clean up key event listeners
-
-tech: extract localStorage (load/save) logic into own module?
-tech: modularize localStorage
-  opt: just use regular localStorageAPI for now and modularize later?
-  opt: just load/save an entire object?
-  opt: api:
-    loadVolume()
-    saveVolume()
-    loadTranspose()
-    saveTranspose()
 
 tech: maybe dont make noteNumberFromKey() return integers including 0 because it's falsy to the outside code
 
@@ -104,7 +96,6 @@ tech: should i use a framework? (zb react, pro/con)
 tech: move oscillator logic to own module?
 
 what data do i want to track and what do i want to do with it?
-  save timbre setting in localStorage?
 what should the data structure look like? (also the data tracking api/interface)
 
 save and load chosen keyboard layout
@@ -125,21 +116,15 @@ interactive visual ADSR envelope?
 
 
 
-NAME OF THIS FILE:
 
-concept
 
-decisions
+TABLET REQUIREMENTS
 
-product / product planning
+low latency
 
-design
+multitouch
 
-project
 
-problems
-
-UX, user experience
 
 
 
