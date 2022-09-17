@@ -1,25 +1,38 @@
 * {
   box-sizing: border-box;
   font-family: Arial;
+  font-size: 14px;
   margin: 0;
   padding: 0;
 }
 
 body {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+header {
+  width: 100%;
+  background-color: #EEEEEE;
+  padding: 16px;
+  display: flex;
   justify-content: center;
-  height: 100%;
+}
+
+header>div {
+  margin: 0 32px;
 }
 
 main {
-  background-color: #EEEEEE;
-  padding: 40px;
+  flex: 1;
 }
 
+
+
 select {
-  width: 100%;
-  padding: 10px;
+  width: 160px;
+  padding: 4px;
 }
 
 input {
@@ -28,10 +41,5 @@ input {
 
 label {
   display: block;
-  margin-bottom: 10px;
-}
-
-
-.mb {
-  margin-bottom: 30px;
+  margin-bottom: 4px;
 }

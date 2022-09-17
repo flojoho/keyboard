@@ -30,4 +30,3 @@ const set = (key, value) => {
 }
 
 export default { get, set };
-

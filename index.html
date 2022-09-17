@@ -2,28 +2,25 @@
 <html>
   <head>
     <title>Web Synthesizer</title>
-    <script src="script.js" type="module"></script>
+    <script src="modules/index.js" type="module"></script>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <main>
-      <h1 class="mb">
-        Type something!
-      </h1>
-      <div class="setting mb">
+    <header>
+      <div class="setting">
         <div>
           <label for="timbreSelect">
-            Volume:
+            volume
           </label>
         </div>
         <div>
           <input type="range" id="volumeSlider" min="0" max="100" value="100">
         </div>
       </div>
-      <div class="setting mb">
+      <div class="setting">
         <div>
           <label for="timbreSelect">
-            Sound:
+            sound
           </label>
         </div>
         <div>
@@ -38,7 +35,7 @@
       <div class="setting">
         <div>
           <label for="layoutSelect">
-            Keyboard Layout:
+            keyboard layout
           </label>
         </div>
         <div>
@@ -48,6 +45,7 @@
           </select>
         </div>
       </div>
-    </main>
+    </header>
+    <main id="buttonGridContainer"></main>
   </body>
 </html>

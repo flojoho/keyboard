@@ -5,6 +5,13 @@ const volumeSlider = document.getElementById('volumeSlider');
 const timbreSelect = document.getElementById('timbreSelect');
 const layoutSelect = document.getElementById('layoutSelect');
 
+timbreSelect.value = settings.get('timbre');
+
+const volume = settings.get('volume');
+if(!isNaN(volume)) {
+  volumeSlider.value = volume;
+}
+
 const Context = () => {
   let audioContext = null;
 
@@ -63,9 +70,8 @@ function afterFirstUserAction(firstKeyEvent) {
     settings.set('volume', percentage);
   }
 
-  if(settings.get('volume')) { // TODO: improve this isset-function
-    const volume = settings.get('volume');
-    volumeSlider.value = volume;
+  const volume = settings.get('volume');
+  if(!isNaN(volume)) {
     changeVolume(volume);
   }
 
@@ -123,9 +129,10 @@ function afterFirstUserAction(firstKeyEvent) {
   function changeTimbre() {
     if(timbreSelect.selectedIndex === timbreSelect.length - 1) {
       timbreSelect.selectedIndex = 0;
-      return;
+    } else {
+      timbreSelect.selectedIndex++;
     }
-    timbreSelect.selectedIndex++;
+    settings.set('timbre', timbreSelect.value)
   }
 
   //**************************** EVENT HANDLING ************************
