@@ -10,18 +10,21 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-color: #222222;
+  color: #eeeeee;
+  overscroll-behavior: contain; /* disable pull to refresh */
 }
 
-header {
+footer {
   width: 100%;
-  background-color: #EEEEEE;
+  background-color: #555555;
   padding: 16px;
   display: flex;
   justify-content: center;
 }
 
-header>div {
-  margin: 0 32px;
+footer>div {
+  margin: 0 24px;
 }
 
 main {
@@ -42,4 +45,11 @@ input {
 label {
   display: block;
   margin-bottom: 4px;
+}
+
+.note-button {
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  opacity: 0.5;
 }

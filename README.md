@@ -2,11 +2,10 @@
 
 live version: https://flojoho.github.io/web-synthesizer
 
-Synthesizer that runs in the browser and can be played using the computer keyboard.
+Web based synthesizer that can be played using your computer keyboard.
 
 ## Keyboard Shortcuts:
 
-* Ctrl: decrease volume
-* Alt: increase volume
-* Space: change sound
-* Right/Left Arrow Keys: transpose one semitone up/down
+* Up/Down Arrow Keys: Increase/Decrease volume
+* Right/Left Arrow Keys: Transpose one semitone up/down
+* Space: Change sound

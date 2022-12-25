@@ -1,5 +1,8 @@
 import { noteNumberFromKey, transposeUp, transposeDown, changeLayout } from './KeyMapping.js';
 import AudioHandler from './AudioHandler.js';
+import { render } from './ButtonGrid.js';
+
+render();
 
 function incrementStatistics(data) {
   let statistics = JSON.parse(localStorage.getItem('statistics'));
