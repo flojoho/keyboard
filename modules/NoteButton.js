@@ -3,10 +3,6 @@ import { spacing } from './ButtonGrid.js';
 
 export const diameter = 80;
 
-// offsetX
-// alpha?
-// colour
-
 class NoteButton {
   #div
   #noteNumber
@@ -30,7 +26,7 @@ class NoteButton {
       e.preventDefault();
       if(this.#note) return;
 
-      this.#yTouchStart = e.changedTouches[0].clientY;
+      this.#yTouchStart = e.targetTouches[0].clientY;
       
       this.#note = new Note(this.#noteNumber);
       this.#note.start();
@@ -41,7 +37,7 @@ class NoteButton {
     this.#div.addEventListener('touchmove', e => {
       e.preventDefault();
 
-      const pitchChange = (this.#yTouchStart - e.changedTouches[0].clientY) / (diameter + spacing)
+      const pitchChange = (this.#yTouchStart - e.targetTouches[0].clientY) / (diameter + spacing);
       this.#note.changePitch(pitchChange);
     });
 
