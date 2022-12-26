@@ -49,9 +49,8 @@ label {
 
 .note-button {
   border-radius: 50%;
-  background-color: white;
   position: absolute;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .note-button-active {

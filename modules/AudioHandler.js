@@ -13,6 +13,8 @@ const timbreSelect = document.getElementById('timbreSelect');
 
 timbreSelect.value = settings.get('timbre');
 
+timbreSelect.addEventListener('change', () => settings.set('timbre', timbreSelect.value));
+
 const initialVolume = settings.get('volume');
 if(!isNaN(initialVolume)) {
   volumeSlider.value = initialVolume;
@@ -50,7 +52,7 @@ const changeTimbre = () => {
   } else {
     timbreSelect.selectedIndex++;
   }
-  settings.set('timbre', timbreSelect.value)
+  settings.set('timbre', timbreSelect.value);
 }
 
 const frequencyFromNoteNumber = noteNumber => {

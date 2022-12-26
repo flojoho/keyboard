@@ -1,6 +1,6 @@
 import { Note } from './AudioHandler.js';
 
-export const diameter = 70;
+export const diameter = 80;
 
 // offsetX
 // alpha?
@@ -22,6 +22,7 @@ class NoteButton {
     this.#div.classList.add('note-button');
     this.#div.style.width = `${ diameter }px`;
     this.#div.style.height = `${ diameter }px`;
+    this.#div.style.backgroundColor = `hsl(${ noteNumber / 12 * 360 }, 100%, 50%)`;
     this.#div.style.left = `${ x }px`;
     this.#div.style.top = `${ y }px`;
 
