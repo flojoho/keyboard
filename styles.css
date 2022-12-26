@@ -53,3 +53,7 @@ label {
   position: absolute;
   opacity: 0.5;
 }
+
+.note-button-active {
+  opacity: 1;
+}

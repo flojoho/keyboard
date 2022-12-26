@@ -30,6 +30,8 @@ class NoteButton {
       
       this.#note = new Note(this.#noteNumber);
       this.#note.start();
+
+      this.#div.classList.add('note-button-active');
     });
 
     this.#div.addEventListener('touchend', e => {
@@ -37,6 +39,8 @@ class NoteButton {
       
       this.#note.stop();
       this.#note = undefined;
+
+      this.#div.classList.remove('note-button-active');
     });
   }
 

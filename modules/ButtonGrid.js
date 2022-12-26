@@ -11,8 +11,8 @@ const render = () => {
   const buttonsPerRow = Math.floor(divWidth / (diameter + spacing));
   const buttonsPerColumn = Math.floor(divHeight / (diameter + spacing));
   
-  const marginX = (divWidth - (buttonsPerRow * (diameter + spacing))) / 2
-  const marginY = (divHeight - (buttonsPerColumn * (diameter + spacing))) / 2
+  const marginX = (divWidth - (buttonsPerRow * (diameter + spacing))) / 2;
+  const marginY = (divHeight - (buttonsPerColumn * (diameter + spacing))) / 2;
 
   buttonGridContainer.textContent = '';
 
