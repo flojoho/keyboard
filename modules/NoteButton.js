@@ -1,4 +1,4 @@
-import AudioHandler from './AudioHandler.js';
+import { Note } from './AudioHandler.js';
 
 export const diameter = 70;
 
@@ -11,6 +11,7 @@ class NoteButton {
   #noteNumber
   #x
   #y
+  #note
   
   constructor(noteNumber, x, y) {
     this.#noteNumber = noteNumber;
@@ -24,12 +25,18 @@ class NoteButton {
     this.#div.style.left = `${ x }px`;
     this.#div.style.top = `${ y }px`;
 
-    this.#div.addEventListener('touchstart', () => {
-      console.log(this.#x, this.#y)
+    this.#div.addEventListener('touchstart', e => {
+      e.preventDefault();
+      
+      this.#note = new Note(this.#noteNumber);
+      this.#note.start();
     });
 
-    this.#div.addEventListener('touchend', () => {
-      console.log(this.#x, this.#y)
+    this.#div.addEventListener('touchend', e => {
+      e.preventDefault();
+      
+      this.#note.stop();
+      this.#note = undefined;
     });
   }
 

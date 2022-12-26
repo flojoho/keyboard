@@ -1,5 +1,5 @@
-import { noteNumberFromKey, transposeUp, transposeDown, changeLayout } from './KeyMapping.js';
-import AudioHandler from './AudioHandler.js';
+import { noteNumberFromKey, transposeUp, transposeDown } from './KeyMapping.js';
+import AudioHandler, { Note } from './AudioHandler.js';
 import ButtonGrid from './ButtonGrid.js';
 
 ButtonGrid.render();
@@ -18,10 +18,13 @@ function incrementStatistics(data) {
 }
 
 const pressedKeys = {};
+const notes = {};
 
 function noteKeyGotPressed(keyCode) {
   const noteNumber = noteNumberFromKey(keyCode);
-  AudioHandler.startNote(keyCode);
+  const note = new Note(noteNumber);
+  notes[keyCode] = note;
+  note.start()
   incrementStatistics({
     volume: volumeSlider.value,
     noteNumber: noteNumber
@@ -30,7 +33,7 @@ function noteKeyGotPressed(keyCode) {
 
 function noteKeyGotReleased(keyCode) {
   const noteNumber = noteNumberFromKey(keyCode);
-  AudioHandler.stopNote(keyCode);
+  notes[keyCode].stop();
 }
 
 //**************************** EVENT HANDLING ************************
@@ -89,10 +92,4 @@ document.addEventListener('keyup', e => {
 
 volumeSlider.addEventListener('input', () => {
   AudioHandler.setVolume(volumeSlider.value);
-});
-
-const layoutSelect = document.getElementById('layoutSelect');
-
-layoutSelect.addEventListener('change', () => {
-  changeLayout(layoutSelect.value);
 });

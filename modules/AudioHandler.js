@@ -1,5 +1,5 @@
 import settings from './settings.js';
-import { noteNumberFromKey, transposeUp, transposeDown, changeLayout } from './KeyMapping.js';
+import { noteNumberFromKey, transposeUp, transposeDown } from './KeyMapping.js';
 
 const gainBalanceFactors = {
   square: 1,
@@ -18,13 +18,6 @@ if(!isNaN(initialVolume)) {
   volumeSlider.value = initialVolume;
 }
 
-
-
-
-
-
-
-const notes = {}
 const maxGain = 0.2;
 const volume = typeof initialVolume === 'string' ? Number.parseFloat(initialVolume) : 50;
 let context;
@@ -38,16 +31,6 @@ const ensureContext = () => {
     volumeNode.gain.value = volume/100 * maxGain;
     volumeNode.connect(context.destination);
   }
-}
-
-const startNote = (keyCode) => {
-  ensureContext();
-  addOscillator(keyCode);
-}
-
-const stopNote = keyCode => {
-  ensureContext();
-  removeOscillator(keyCode);
 }
 
 const stopAllNotes = () => {
@@ -74,44 +57,46 @@ const frequencyFromNoteNumber = noteNumber => {
   return 440 * 2**(noteNumber / 12);
 }
 
-const addOscillator = keyCode => {
-  const noteNumber = noteNumberFromKey(keyCode);
-  const frequency = frequencyFromNoteNumber(noteNumber);
-  const oscillatorType = timbreSelect.value;
+export class Note {
+  #noteNumber
+  #oscillatorNode
   
-  const note = {};
-  note.oscillatorNode = context.createOscillator();
-  note.oscillatorNode.frequency.setValueAtTime(frequency, context.currentTime);
-  note.oscillatorNode.type = oscillatorType;
-
-  note.gainNode = context.createGain();
-  note.gainNode.gain.value = gainBalanceFactors[oscillatorType];
-
-  note.oscillatorNode.connect(note.gainNode);
-  note.gainNode.connect(volumeNode);
-
-  note.oscillatorNode.start();
-  note.gainNode.gain.setTargetAtTime(0, context.currentTime, 1.5);
-
-  notes[keyCode] = note;
-}
-
-const removeOscillator = keyCode => {
-  notes[keyCode].oscillatorNode.stop();
-}
-
-class Note {
   constructor(noteNumber) {
-
+    this.#noteNumber = noteNumber;
   }
 
   start() {
-
+    ensureContext();
+    this.#addOscillator();
   }
 
   stop() {
+    ensureContext();
+    this.#removeOscillator();
+  }
+
+  #addOscillator() {
+    const frequency = frequencyFromNoteNumber(this.#noteNumber);
+    const oscillatorType = timbreSelect.value;
     
+    const note = {};
+    this.#oscillatorNode = context.createOscillator();
+    this.#oscillatorNode.frequency.setValueAtTime(frequency, context.currentTime);
+    this.#oscillatorNode.type = oscillatorType;
+
+    const gainNode = context.createGain();
+    gainNode.gain.value = gainBalanceFactors[oscillatorType];
+
+    this.#oscillatorNode.connect(gainNode);
+    gainNode.connect(volumeNode);
+
+    this.#oscillatorNode.start();
+    gainNode.gain.setTargetAtTime(0, context.currentTime, 1.5);
+  }
+
+  #removeOscillator() {
+    this.#oscillatorNode.stop();
   }
 }
 
-export default { startNote, stopNote, stopAllNotes, setVolume, changeTimbre, Note };
+export default { stopAllNotes, setVolume, changeTimbre, Note };

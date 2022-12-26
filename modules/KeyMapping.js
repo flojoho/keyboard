@@ -49,8 +49,3 @@ export const noteNumberFromKey = keyCode => {
   if(!Number.isInteger(noteNumber)) return null;
   return noteNumber + settings.get('transposeOffset');
 }
-
-export const changeLayout = name => {
-  if(!typeof name === 'string') throw new Error('name must be a string');
-  activeMapping = keyboardLayouts[name] || keyboardLayouts['righthand'];
-}
