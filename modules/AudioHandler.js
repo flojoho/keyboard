@@ -18,8 +18,90 @@ if(!isNaN(initialVolume)) {
   volumeSlider.value = initialVolume;
 }
 
+
+
+
+
+
+
+const notes = {}
+const maxGain = 0.2;
+const volume = typeof initialVolume === 'string' ? Number.parseFloat(initialVolume) : 50;
+let context;
+let volumeNode;
+
+const ensureContext = () => {
+  if(!context) {
+    context = new AudioContext();
+
+    volumeNode = context.createGain();
+    volumeNode.gain.value = volume/100 * maxGain;
+    volumeNode.connect(context.destination);
+  }
+}
+
+const startNote = (keyCode) => {
+  ensureContext();
+  addOscillator(keyCode);
+}
+
+const stopNote = keyCode => {
+  ensureContext();
+  removeOscillator(keyCode);
+}
+
+const stopAllNotes = () => {
+  ensureContext();
+}
+
+const setVolume = percentage => {
+  ensureContext();
+  // TODO: should i use a number between 0 and 1 instead of percentages?
+  volumeNode.gain.value = percentage / 100 * maxGain;
+  settings.set('volume', percentage);
+}
+
+const changeTimbre = () => {
+  if(timbreSelect.selectedIndex === timbreSelect.length - 1) {
+    timbreSelect.selectedIndex = 0;
+  } else {
+    timbreSelect.selectedIndex++;
+  }
+  settings.set('timbre', timbreSelect.value)
+}
+
+const frequencyFromNoteNumber = noteNumber => {
+  return 440 * 2**(noteNumber / 12);
+}
+
+const addOscillator = keyCode => {
+  const noteNumber = noteNumberFromKey(keyCode);
+  const frequency = frequencyFromNoteNumber(noteNumber);
+  const oscillatorType = timbreSelect.value;
+  
+  const note = {};
+  note.oscillatorNode = context.createOscillator();
+  note.oscillatorNode.frequency.setValueAtTime(frequency, context.currentTime);
+  note.oscillatorNode.type = oscillatorType;
+
+  note.gainNode = context.createGain();
+  note.gainNode.gain.value = gainBalanceFactors[oscillatorType];
+
+  note.oscillatorNode.connect(note.gainNode);
+  note.gainNode.connect(volumeNode);
+
+  note.oscillatorNode.start();
+  note.gainNode.gain.setTargetAtTime(0, context.currentTime, 1.5);
+
+  notes[keyCode] = note;
+}
+
+const removeOscillator = keyCode => {
+  notes[keyCode].oscillatorNode.stop();
+}
+
 class Note {
-  constructor() {
+  constructor(noteNumber) {
 
   }
 
@@ -32,80 +114,4 @@ class Note {
   }
 }
 
-class AudioHandler {
-  static #notes = {};
-  static #maxGain = 0.2;
-  static #volume = typeof initialVolume === 'string' ? Number.parseFloat(initialVolume) : 50;
-
-  static startNote(keyCode) {
-    this.#ensureContext();
-    this.#addOscillator(keyCode);
-  }
-
-  static stopNote(keyCode) {
-    this.#ensureContext();
-    this.#removeOscillator(keyCode);
-  }
-
-  static stopAllNotes() {
-    this.#ensureContext();
-  }
-  
-  static setVolume(percentage) {
-    this.#ensureContext();
-    // TODO: should i use a number between 0 and 1 instead of percentages?
-    this.volumeNode.gain.value = percentage / 100 * this.#maxGain;
-    settings.set('volume', percentage);
-  }
-
-  static changeTimbre() {
-    if(timbreSelect.selectedIndex === timbreSelect.length - 1) {
-      timbreSelect.selectedIndex = 0;
-    } else {
-      timbreSelect.selectedIndex++;
-    }
-    settings.set('timbre', timbreSelect.value)
-  }
-
-  static #ensureContext() {
-    if(!this.context) {
-      this.context = new AudioContext();
-
-      this.volumeNode = this.context.createGain();
-      this.volumeNode.gain.value = this.#volume/100 * this.#maxGain;
-      this.volumeNode.connect(this.context.destination);
-    }
-  }
-
-  static #frequencyFromNoteNumber(noteNumber) {
-    return 440 * 2**(noteNumber / 12);
-  }
-
-  static #addOscillator(keyCode) {
-    const noteNumber = noteNumberFromKey(keyCode);
-    const frequency = this.#frequencyFromNoteNumber(noteNumber);
-    const oscillatorType = timbreSelect.value;
-    
-    const note = {};
-    note.oscillatorNode = this.context.createOscillator();
-    note.oscillatorNode.frequency.setValueAtTime(frequency, this.context.currentTime);
-    note.oscillatorNode.type = oscillatorType;
-  
-    note.gainNode = this.context.createGain();
-    note.gainNode.gain.value = gainBalanceFactors[oscillatorType];
-  
-    note.oscillatorNode.connect(note.gainNode);
-    note.gainNode.connect(this.volumeNode);
-  
-    note.oscillatorNode.start();
-    note.gainNode.gain.setTargetAtTime(0, this.context.currentTime, 1.5);
-  
-    this.#notes[keyCode] = note;
-  }
-  
-  static #removeOscillator(keyCode) {
-    this.#notes[keyCode].oscillatorNode.stop();
-  }
-}
-
-export default AudioHandler;
+export default { startNote, stopNote, stopAllNotes, setVolume, changeTimbre, Note };
