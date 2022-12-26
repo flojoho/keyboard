@@ -2,7 +2,7 @@ import NoteButton, { diameter } from './NoteButton.js';
 
 const buttonGridContainer = document.getElementById('buttonGridContainer');
 
-const spacing = 5;
+export const spacing = 5;
 
 const render = () => {
   const divWidth = buttonGridContainer.offsetWidth;

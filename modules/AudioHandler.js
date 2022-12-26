@@ -61,7 +61,8 @@ const frequencyFromNoteNumber = noteNumber => {
 
 export class Note {
   #noteNumber
-  #oscillatorNode
+  #oscillator
+
   
   constructor(noteNumber) {
     this.#noteNumber = noteNumber;
@@ -77,27 +78,33 @@ export class Note {
     this.#removeOscillator();
   }
 
+  changePitch(offset) {
+    const now = context.currentTime;
+    const frequency = frequencyFromNoteNumber(this.#noteNumber + offset);
+    this.#oscillator.frequency.setValueAtTime(frequency, now);
+  }
+
   #addOscillator() {
     const frequency = frequencyFromNoteNumber(this.#noteNumber);
     const oscillatorType = timbreSelect.value;
     
     const note = {};
-    this.#oscillatorNode = context.createOscillator();
-    this.#oscillatorNode.frequency.setValueAtTime(frequency, context.currentTime);
-    this.#oscillatorNode.type = oscillatorType;
+    this.#oscillator = context.createOscillator();
+    this.#oscillator.frequency.setValueAtTime(frequency, context.currentTime);
+    this.#oscillator.type = oscillatorType;
 
     const gainNode = context.createGain();
     gainNode.gain.value = gainBalanceFactors[oscillatorType];
 
-    this.#oscillatorNode.connect(gainNode);
+    this.#oscillator.connect(gainNode);
     gainNode.connect(volumeNode);
 
-    this.#oscillatorNode.start();
+    this.#oscillator.start();
     gainNode.gain.setTargetAtTime(0, context.currentTime, 1.5);
   }
 
   #removeOscillator() {
-    this.#oscillatorNode.stop();
+    this.#oscillator.stop();
   }
 }
 
