@@ -37,8 +37,12 @@ class NoteButton {
     this.#div.addEventListener('touchmove', e => {
       e.preventDefault();
 
-      const pitchChange = (this.#yTouchStart - e.targetTouches[0].clientY) / (diameter + spacing);
+      const yMouse = e.targetTouches[0].clientY
+
+      const pitchChange = (this.#yTouchStart - yMouse) / (diameter + spacing);
       this.#note.changePitch(pitchChange);
+
+      this.#div.style.top = `${ this.#y + (yMouse - this.#yTouchStart) }px`;
     });
 
     this.#div.addEventListener('touchend', e => {
@@ -48,6 +52,8 @@ class NoteButton {
       this.#note = undefined;
 
       this.#div.classList.remove('note-button-active');
+
+      this.#div.style.top = `${ this.#y }px`;
     });
   }
 

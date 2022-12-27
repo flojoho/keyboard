@@ -100,7 +100,7 @@ export class Note {
     gainNode.connect(volumeNode);
 
     this.#oscillator.start();
-    gainNode.gain.setTargetAtTime(0, context.currentTime, 1.5);
+    // gainNode.gain.setTargetAtTime(0, context.currentTime, 2);
   }
 
   #removeOscillator() {
