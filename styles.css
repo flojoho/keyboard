@@ -48,8 +48,9 @@ label {
 }
 
 .note-button {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  position: absolute;
   opacity: 0.6;
 }
 
