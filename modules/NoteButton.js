@@ -7,12 +7,14 @@ export const getDiameter = () => {
   return diameter;
 }
 export const setDiameter = num => {
+  if(typeof num !== 'number') throw new Error('Diameter must be a number');
   diameter = num;
 }
 export const getSpacing = () => {
   return spacing;
 }
 export const setSpacing = num => {
+  if(typeof num !== 'number') throw new Error('Diameter must be a number');
   spacing = num;
 }
 
@@ -30,15 +32,17 @@ class NoteButton {
     const circle = document.createElement('div');
     circle.classList.add('note-button');
     circle.style.backgroundColor = `hsl(${ noteNumber / 12 * 360 }, 100%, 50%)`;
-    circle.style.width = `${ diameter - spacing }px`;
-    circle.style.height = `${ diameter - spacing }px`;
+    circle.style.width = `${ diameter }px`;
+    circle.style.height = `${ diameter }px`;
 
     this.#div = document.createElement('div');
     this.#div.appendChild(circle);
     this.#div.style.position = `absolute`;
     this.#div.style.display = `flex`;
-    this.#div.style.width = `${ diameter }px`;
-    this.#div.style.height = `${ diameter }px`;
+    this.#div.style.justifyContent = `center`;
+    this.#div.style.alignItems = `center`;
+    this.#div.style.width = `${ diameter + spacing }px`;
+    this.#div.style.height = `${ diameter + spacing }px`;
     this.#div.style.left = `${ x }px`;
     this.#div.style.top = `${ y }px`;
 
@@ -59,7 +63,7 @@ class NoteButton {
 
       const xMouse = e.targetTouches[0].clientX
 
-      const pitchChange = (xMouse - this.#xTouchStart) / diameter;
+      const pitchChange = (xMouse - this.#xTouchStart) / (diameter + spacing);
       this.#note.changePitch(pitchChange);
 
       this.#div.style.left = `${ this.#x + (xMouse - this.#xTouchStart) }px`;
