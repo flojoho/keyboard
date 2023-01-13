@@ -10,6 +10,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  max-height: -webkit-fill-available;
   background-color: #222222;
   color: #eeeeee;
   overscroll-behavior: contain; /* disable pull to refresh */
@@ -20,7 +21,6 @@ footer {
   background-color: #555555;
   padding: 16px;
   display: flex;
-  justify-content: center;
 }
 
 footer>div {
