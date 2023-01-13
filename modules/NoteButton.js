@@ -1,7 +1,20 @@
 import { Note } from './AudioHandler.js';
 
-export const diameter = 85;
-const spacing = 5;
+let diameter = 85;
+let spacing = 5;
+
+export const getDiameter = () => {
+  return diameter;
+}
+export const setDiameter = num => {
+  diameter = num;
+}
+export const getSpacing = () => {
+  return spacing;
+}
+export const setSpacing = num => {
+  spacing = num;
+}
 
 class NoteButton {
   #div

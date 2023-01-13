@@ -11,22 +11,12 @@
   <body>
     <main id="buttonGridContainer"></main>
     <footer>
-      <div class="setting">
-        <div>
-          <label for="timbreSelect">
-            volume
-          </label>
-        </div>
+      <div>
         <div>
           <input type="range" id="volumeSlider" min="0" max="100" value="100">
         </div>
       </div>
-      <div class="setting">
-        <div>
-          <label for="timbreSelect">
-            sound
-          </label>
-        </div>
+      <div class="flex-stretch">
         <div>
           <select id="timbreSelect">
             <option value="square">square</option>
@@ -36,7 +26,22 @@
           </select>
         </div>
       </div>
+      <div>
+        <button id="settings-button">⚙️</button>
       </div>
     </footer>
+    <aside id="modal" class="hidden">
+      <div>
+        <span id="close-button">×</span>
+        <div>
+          <div>button size</div>
+          <input type="range" id="button-size-slider" min="50" max="100" value="85">
+        </div>
+        <div>
+          <div>space between buttons</div>
+          <input type="range" id="button-size-slider" min="0" max="30" value="5">
+        </div>
+      </div>
+    </aside>
   </body>
 </html>

@@ -1,5 +1,6 @@
 import { noteNumberFromKey, transposeUp, transposeDown } from './KeyMapping.js';
 import AudioHandler, { Note } from './AudioHandler.js';
+import './SettingsModal.js';
 import ButtonGrid from './ButtonGrid.js';
 
 ButtonGrid.render();

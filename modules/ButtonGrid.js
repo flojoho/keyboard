@@ -1,10 +1,12 @@
-import NoteButton, { diameter } from './NoteButton.js';
+import NoteButton, { getDiameter } from './NoteButton.js';
 
 const buttonGridContainer = document.getElementById('buttonGridContainer');
 
 const render = () => {
   const divWidth = buttonGridContainer.offsetWidth;
   const divHeight = buttonGridContainer.offsetHeight;
+
+  const diameter = getDiameter();
 
   const buttonsPerRow = Math.floor(divWidth / diameter);
   const buttonsPerColumn = Math.floor(divHeight / diameter);

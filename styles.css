@@ -19,12 +19,13 @@ body {
 footer {
   width: 100%;
   background-color: #555555;
-  padding: 16px;
+  padding: 16px 0;
   display: flex;
+  align-items: center;
+  overflow: scroll;
 }
-
 footer>div {
-  margin: 0 24px;
+  margin: 0 16px 0 24px;
 }
 
 main {
@@ -37,9 +38,8 @@ select {
   width: 160px;
   padding: 4px;
 }
-
 input {
-  width: 100%;
+  width: 160px;
 }
 
 label {
@@ -56,4 +56,53 @@ label {
 
 .note-button-active {
   opacity: 1;
+}
+
+aside {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+aside>div {
+  background-color: rgba(255,255,255,0.8);
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  padding: 0 36px;
+  color: black;
+  filter: drop-shadow(0 0 0.75rem rgba(0,0,0,0.3));
+  backdrop-filter: blur(12px);
+}
+aside>div>div {
+  margin: 36px 0;
+}
+
+#close-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+#settings-button {
+  border: none;
+  background-color: white;
+  font-size: 32px;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.flex-stretch {
+  flex: 1;
 }
