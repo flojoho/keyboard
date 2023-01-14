@@ -1,32 +1,57 @@
 
-const defaultSettings = {
-  volume: 50,
-  transposeOffset: 0,
-  timbre: 'square'
-}
+const defaultSettings = [
+  {
+    name: 'volume',
+    defaultValue: 50
+  },
+  {
+    name: 'transposeOffset',
+    defaultValue: 0
+  },
+  {
+    name: 'timbre',
+    defaultValue: 'square'
+  },
+  {
+    name: 'buttonSize',
+    defaultValue: 85
+  },
+  {
+    name: 'spacingSize',
+    defaultValue: 5
+  }
+]
+
+const defaultJSON = {};
+defaultSettings.forEach(setting => {
+  const { name, defaultValue } = setting;
+  defaultJSON[name] = defaultValue;
+});
 
 let settings;
 
-const loadSettings = () => {
-  const savedSettings = localStorage.getItem('settings');
-  settings = savedSettings ? JSON.parse(savedSettings) : defaultSettings;
-}
-loadSettings();
+const savedSettings = localStorage.getItem('settings');
+settings = savedSettings ? JSON.parse(savedSettings) : defaultJSON;
 
-const saveSettings = () => {
-  localStorage.setItem('settings', JSON.stringify(settings));
-}
+const get = key => {
+  if(typeof key !== 'string') throw new Error('Expected string');
 
-const get = (key) => {
-  if(typeof defaultSettings[key] === 'undefined') throw new Error('Setting does not exist!');
-  if(typeof settings[key] === 'undefined') return defaultSettings[key];
+  const defaultSetting = defaultSettings.find(setting => setting.name === key);
+  if(typeof defaultSetting === 'undefined') throw new Error('Setting not found');
+  if(typeof settings[key] === 'undefined') return defaultSetting.defaultValue;
+
   return settings[key];
 }
 
 const set = (key, value) => {
-  if(typeof defaultSettings[key] === 'undefined') throw new Error('Setting does not exist!');
+  if(typeof key !== 'string') throw new Error('Expected string');
+
+  const defaultSetting = defaultSettings.find(setting => setting.name === key);
+  if(typeof defaultSetting === 'undefined') throw new Error('Setting not found');
+  if(typeof value !== typeof defaultSetting.defaultValue) throw new Error('Wrong value type');
+
   settings[key] = value;
-  saveSettings();
+  localStorage.setItem('settings', JSON.stringify(settings));
 }
 
 export default { get, set };

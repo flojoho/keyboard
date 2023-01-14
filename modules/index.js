@@ -43,7 +43,7 @@ const onKeyDown = e => {
     const prevVolume = volumeSlider.value;
     let nextVolume;
     if (e.code === 'ArrowUp') {
-      nextVolume = parseInt(prevVolume) + 5;
+      nextVolume = Number.parseFloat(prevVolume) + 5;
     } else if (e.code === 'ArrowDown') {
       nextVolume = prevVolume - 5;
     }
@@ -92,5 +92,5 @@ document.addEventListener('keyup', e => {
 });
 
 volumeSlider.addEventListener('input', () => {
-  AudioHandler.setVolume(volumeSlider.value);
+  AudioHandler.setVolume(Number.parseFloat(volumeSlider.value));
 });

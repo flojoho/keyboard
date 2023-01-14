@@ -1,7 +1,8 @@
 import { Note } from './AudioHandler.js';
+import settings from './settings.js';
 
-let diameter = 85;
-let spacing = 5;
+let diameter = settings.get('buttonSize');
+let spacing = settings.get('spacingSize');
 
 export const getDiameter = () => {
   return diameter;

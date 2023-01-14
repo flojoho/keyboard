@@ -1,5 +1,4 @@
 import settings from './settings.js';
-import { noteNumberFromKey, transposeUp, transposeDown } from './KeyMapping.js';
 
 const gainBalanceFactors = {
   square: 1,
