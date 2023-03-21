@@ -9,11 +9,11 @@ const keyboardRows = [
   ["ShiftLeft", "IntlBackslash", "KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Comma", "Period", "Slash", "ShiftRight", undefined, undefined]
 ];
 
-type mapping = {
+type Mapping = {
   [Key: string]: number
 }
 
-const rightHandMapping: mapping = {};
+const rightHandMapping: Mapping = {};
 keyboardRows.reverse().forEach((row, rowNum) => {
   row.forEach((keyCode, index) => {
     if(!keyCode) return;
@@ -21,7 +21,7 @@ keyboardRows.reverse().forEach((row, rowNum) => {
   });
 });
 
-const leftHandMapping: mapping = {};
+const leftHandMapping: Mapping = {};
 keyboardRows.forEach((row, rowNum) => {
   row.forEach((keyCode, index) => {
     if(!keyCode) return;

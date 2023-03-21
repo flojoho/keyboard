@@ -53,10 +53,10 @@ const onKeyDown = e => {
     }
     if (['ArrowLeft', 'ArrowRight'].includes(e.code)) {
         if (e.code === 'ArrowLeft') {
-            transposeUp();
+            transposeDown();
         }
         if (e.code === 'ArrowRight') {
-            transposeDown();
+            transposeUp();
         }
         return;
     }

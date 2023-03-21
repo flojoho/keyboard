@@ -8,12 +8,12 @@ addEventListener('resize', ButtonGrid.render);
 
 const volumeSlider = document.getElementById('volumeSlider');
 
-type statistics = {
+type Statistics = {
   volume: number,
   noteNumber: number
 }
 
-function incrementStatistics(data: statistics) {
+function incrementStatistics(data: Statistics) {
   let statistics = JSON.parse(localStorage.getItem('statistics') || '{}');
 
   for(const [key, value] of Object.entries(data)) {
@@ -24,15 +24,15 @@ function incrementStatistics(data: statistics) {
   localStorage.setItem('statistics', JSON.stringify(statistics));
 }
 
-type pressedKeysDictionary = {
+type PressedKeys = {
   [Key: string]: boolean
 }
-const pressedKeys: pressedKeysDictionary = {};
+const pressedKeys: PressedKeys = {};
 
-type noteDictionary = {
+type Notes = {
   [Key: string]: Note
 }
-const notes: noteDictionary = {};
+const notes: Notes = {};
 
 function noteKeyGotPressed(keyCode: string) {
   const noteNumber = noteNumberFromKey(keyCode);
@@ -71,10 +71,10 @@ const onKeyDown = e => {
   
   if(['ArrowLeft', 'ArrowRight'].includes(e.code)) {
     if(e.code === 'ArrowLeft') {
-      transposeUp();
+      transposeDown();
     }
     if(e.code === 'ArrowRight') {
-      transposeDown();
+      transposeUp();
     }
     return;
   }

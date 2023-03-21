@@ -22,10 +22,10 @@ const defaultSettings = [
   }
 ]
 
-type defaultJSON = {
+type DefaultJSON = {
   [Key: string]: number | string
 }
-const defaultJSON: defaultJSON = {};
+const defaultJSON: DefaultJSON = {};
 defaultSettings.forEach(setting => {
   const { name, defaultValue } = setting;
   defaultJSON[name] = defaultValue;
