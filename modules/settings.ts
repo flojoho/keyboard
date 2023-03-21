@@ -22,7 +22,10 @@ const defaultSettings = [
   }
 ]
 
-const defaultJSON = {};
+type defaultJSON = {
+  [Key: string]: number | string
+}
+const defaultJSON: defaultJSON = {};
 defaultSettings.forEach(setting => {
   const { name, defaultValue } = setting;
   defaultJSON[name] = defaultValue;
@@ -39,7 +42,7 @@ const get = (key: string) => {
   return settings[key];
 }
 
-const set = (key: string, value) => {
+const set = (key: string, value: string | number) => {
   const defaultSetting = defaultSettings.find(setting => setting.name === key);
   if(typeof defaultSetting === 'undefined') throw new Error('Setting not found');
   if(typeof value !== typeof defaultSetting.defaultValue) throw new Error('Wrong value type');

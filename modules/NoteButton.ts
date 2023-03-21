@@ -80,7 +80,7 @@ class NoteButton {
     });
   }
 
-  appendTo(parent) {
+  appendTo(parent: HTMLElement) {
     parent.appendChild(this.#div);
   }
 }

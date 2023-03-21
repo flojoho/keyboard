@@ -26,7 +26,7 @@ if (!isNaN(initialVolume)) {
     volumeSlider.value = initialVolume;
 }
 const maxGain = 0.2;
-const volume = typeof initialVolume === 'string' ? Number.parseFloat(initialVolume) : 50;
+const volume = initialVolume;
 let context;
 let volumeNode;
 const ensureContext = () => {

@@ -6,9 +6,7 @@ ButtonGrid.render();
 addEventListener('resize', ButtonGrid.render);
 const volumeSlider = document.getElementById('volumeSlider');
 function incrementStatistics(data) {
-    let statistics = JSON.parse(localStorage.getItem('statistics'));
-    if (typeof statistics !== 'object' || statistics === null)
-        statistics = {};
+    let statistics = JSON.parse(localStorage.getItem('statistics') || '{}');
     for (const [key, value] of Object.entries(data)) {
         if (typeof statistics[key] !== 'object')
             statistics[key] = {};

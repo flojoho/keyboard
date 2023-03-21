@@ -8,9 +8,13 @@ addEventListener('resize', ButtonGrid.render);
 
 const volumeSlider = document.getElementById('volumeSlider');
 
-function incrementStatistics(data) {
-  let statistics = JSON.parse(localStorage.getItem('statistics'));
-  if(typeof statistics !== 'object' || statistics === null) statistics = {};
+type statistics = {
+  volume: number,
+  noteNumber: number
+}
+
+function incrementStatistics(data: statistics) {
+  let statistics = JSON.parse(localStorage.getItem('statistics') || '{}');
 
   for(const [key, value] of Object.entries(data)) {
     if(typeof statistics[key] !== 'object') statistics[key] = {};
@@ -20,8 +24,15 @@ function incrementStatistics(data) {
   localStorage.setItem('statistics', JSON.stringify(statistics));
 }
 
-const pressedKeys = {};
-const notes = {};
+type pressedKeysDictionary = {
+  [Key: string]: boolean
+}
+const pressedKeys: pressedKeysDictionary = {};
+
+type noteDictionary = {
+  [Key: string]: Note
+}
+const notes: noteDictionary = {};
 
 function noteKeyGotPressed(keyCode: string) {
   const noteNumber = noteNumberFromKey(keyCode);
@@ -34,7 +45,7 @@ function noteKeyGotPressed(keyCode: string) {
   });
 }
 
-function noteKeyGotReleased(keyCode) {
+function noteKeyGotReleased(keyCode: string) {
   const noteNumber = noteNumberFromKey(keyCode);
   notes[keyCode].stop();
 }
