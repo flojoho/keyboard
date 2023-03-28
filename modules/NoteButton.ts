@@ -18,15 +18,15 @@ export const setSpacing = (num: number) => {
 }
 
 class NoteButton {
-  #div
-  #noteNumber
-  #x
-  #xTouchStart: number
-  #note
+  private div
+  private noteNumber
+  private x
+  private xTouchStart: number
+  private note
   
   constructor(noteNumber: number, x: number, y: number) {
-    this.#noteNumber = noteNumber;
-    this.#x = x;
+    this.noteNumber = noteNumber;
+    this.x = x;
 
     const circle = document.createElement('div');
     circle.classList.add('note-button');
@@ -34,54 +34,63 @@ class NoteButton {
     circle.style.width = `${ diameter }px`;
     circle.style.height = `${ diameter }px`;
 
-    this.#div = document.createElement('div');
-    this.#div.appendChild(circle);
-    this.#div.style.position = `absolute`;
-    this.#div.style.display = `flex`;
-    this.#div.style.justifyContent = `center`;
-    this.#div.style.alignItems = `center`;
-    this.#div.style.width = `${ diameter + spacing }px`;
-    this.#div.style.height = `${ diameter + spacing }px`;
-    this.#div.style.left = `${ x }px`;
-    this.#div.style.top = `${ y }px`;
+    this.div = document.createElement('div');
+    this.div.appendChild(circle);
+    this.div.style.position = `absolute`;
+    this.div.style.display = `flex`;
+    this.div.style.justifyContent = `center`;
+    this.div.style.alignItems = `center`;
+    this.div.style.opacity = `0.6`;
+    this.div.style.width = `${ diameter + spacing }px`;
+    this.div.style.height = `${ diameter + spacing }px`;
+    this.div.style.left = `${ x }px`;
+    this.div.style.top = `${ y }px`;
 
-    this.#div.addEventListener('touchstart', e => {
+    this.div.addEventListener('touchstart', e => {
       e.preventDefault();
-      if(this.#note) return;
+      if(this.note) return;
 
-      this.#xTouchStart = e.targetTouches[0].clientX;
+      this.xTouchStart = e.targetTouches[0].clientX;
       
-      this.#note = new Note(this.#noteNumber);
-      this.#note.start();
+      this.note = new Note(this.noteNumber);
+      this.note.start();
 
-      this.#div.classList.add('note-button-active');
+      this.addHighlight()
     });
 
-    this.#div.addEventListener('touchmove', e => {
+    this.div.addEventListener('touchmove', e => {
       e.preventDefault();
 
       const xMouse = e.targetTouches[0].clientX
 
-      const pitchChange = (xMouse - this.#xTouchStart) / (diameter + spacing);
-      this.#note.changePitch(pitchChange);
+      const pitchChange = (xMouse - this.xTouchStart) / (diameter + spacing);
+      this.note.changePitch(pitchChange);
 
-      this.#div.style.left = `${ this.#x + (xMouse - this.#xTouchStart) }px`;
+      this.div.style.left = `${ this.x + (xMouse - this.xTouchStart) }px`;
     });
 
-    this.#div.addEventListener('touchend', e => {
+    this.div.addEventListener('touchend', e => {
       e.preventDefault();
       
-      this.#note.stop();
-      this.#note = undefined;
+      this.note.stop();
+      this.note = undefined;
 
-      this.#div.classList.remove('note-button-active');
+      this.removeHighlight();
 
-      this.#div.style.left = `${ this.#x }px`;
+      this.div.style.left = `${ this.x }px`;
     });
   }
 
   appendTo(parent: HTMLElement) {
-    parent.appendChild(this.#div);
+    parent.appendChild(this.div);
+  }
+
+  addHighlight() {
+    this.div.classList.add('note-button-active');
+  }
+
+  removeHighlight() {
+    this.div.classList.remove('note-button-active');
   }
 }
 
