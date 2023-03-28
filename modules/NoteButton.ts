@@ -87,10 +87,12 @@ class NoteButton {
 
   addHighlight() {
     this.div.classList.add('note-button-active');
+    this.div.style.zIndex = '1';
   }
 
   removeHighlight() {
     this.div.classList.remove('note-button-active');
+    this.div.style.zIndex = 'auto';
   }
 }
 
