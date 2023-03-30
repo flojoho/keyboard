@@ -41,7 +41,7 @@ class NoteButton {
             this.xTouchStart = e.targetTouches[0].clientX;
             this.note = new Note(this.noteNumber);
             this.note.start();
-            this.addHighlight();
+            this.enableHighlight();
         });
         this.div.addEventListener('touchmove', e => {
             e.preventDefault();
@@ -54,18 +54,18 @@ class NoteButton {
             e.preventDefault();
             this.note.stop();
             this.note = undefined;
-            this.removeHighlight();
+            this.disableHighlight();
             this.div.style.left = `${this.x}px`;
         });
     }
     appendTo(parent) {
         parent.appendChild(this.div);
     }
-    addHighlight() {
+    enableHighlight() {
         this.div.classList.add('note-button-active');
         this.div.style.zIndex = '1';
     }
-    removeHighlight() {
+    disableHighlight() {
         this.div.classList.remove('note-button-active');
         this.div.style.zIndex = 'auto';
     }

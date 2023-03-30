@@ -23,6 +23,7 @@ function noteKeyGotPressed(keyCode) {
     const note = new Note(noteNumber);
     notes[keyCode] = note;
     note.start();
+    ButtonGrid.enableHighlight(noteNumber);
     incrementStatistics({
         volume: volumeSlider.value,
         noteNumber: noteNumber
@@ -31,6 +32,7 @@ function noteKeyGotPressed(keyCode) {
 function noteKeyGotReleased(keyCode) {
     const noteNumber = noteNumberFromKey(keyCode);
     notes[keyCode].stop();
+    ButtonGrid.disableHighlight(noteNumber);
 }
 //**************************** EVENT HANDLING ************************
 const onKeyDown = e => {

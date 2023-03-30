@@ -19,10 +19,10 @@ export const setSpacing = (num: number) => {
 
 class NoteButton {
   private div
-  private noteNumber
-  private x
+  private x: number
   private xTouchStart: number
   private note
+  public noteNumber: number
   
   constructor(noteNumber: number, x: number, y: number) {
     this.noteNumber = noteNumber;
@@ -55,7 +55,7 @@ class NoteButton {
       this.note = new Note(this.noteNumber);
       this.note.start();
 
-      this.addHighlight()
+      this.enableHighlight();
     });
 
     this.div.addEventListener('touchmove', e => {
@@ -75,7 +75,7 @@ class NoteButton {
       this.note.stop();
       this.note = undefined;
 
-      this.removeHighlight();
+      this.disableHighlight();
 
       this.div.style.left = `${ this.x }px`;
     });
@@ -85,12 +85,12 @@ class NoteButton {
     parent.appendChild(this.div);
   }
 
-  addHighlight() {
+  enableHighlight() {
     this.div.classList.add('note-button-active');
     this.div.style.zIndex = '1';
   }
 
-  removeHighlight() {
+  disableHighlight() {
     this.div.classList.remove('note-button-active');
     this.div.style.zIndex = 'auto';
   }
