@@ -48,11 +48,17 @@ label {
 }
 
 .note-button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.4;
+}
+.note-button-circle {
   width: 100%;
   height: 100%;
   border-radius: 50%;
 }
-
 .note-button-active {
   opacity: 1 !important;
 }
