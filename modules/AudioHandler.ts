@@ -7,8 +7,8 @@ const gainBalanceFactors = {
   sine: 2
 }
 
-const volumeSlider = document.getElementById('volumeSlider');
-const timbreSelect = document.getElementById('timbreSelect');
+const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
+const timbreSelect = document.getElementById('timbreSelect') as HTMLSelectElement;
 
 timbreSelect.value = settings.get('timbre');
 
@@ -61,7 +61,6 @@ const frequencyFromNoteNumber = (noteNumber: number) => {
 export class Note {
   #noteNumber
   #oscillator
-
   
   constructor(noteNumber: number) {
     this.#noteNumber = noteNumber;

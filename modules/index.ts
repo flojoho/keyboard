@@ -6,7 +6,7 @@ import ButtonGrid from './ButtonGrid.js';
 ButtonGrid.render();
 addEventListener('resize', ButtonGrid.render);
 
-const volumeSlider = document.getElementById('volumeSlider');
+const volumeSlider = document.getElementById('volumeSlider') as HTMLInputElement;
 
 type Statistics = {
   volume: number,
@@ -43,7 +43,7 @@ function noteKeyGotPressed(keyCode: string) {
   ButtonGrid.enableHighlight(noteNumber);
 
   incrementStatistics({
-    volume: volumeSlider.value,
+    volume: parseInt(volumeSlider.value),
     noteNumber: noteNumber
   });
 }
@@ -69,7 +69,7 @@ const onKeyDown = e => {
     if(nextVolume > 100) nextVolume = 100;
     if(nextVolume < 0) nextVolume = 0;
     
-    volumeSlider.value = nextVolume;
+    volumeSlider.value = nextVolume.toString();
     AudioHandler.setVolume(nextVolume);
     return;
   }

@@ -1,6 +1,6 @@
 import NoteButton, { getDiameter, getSpacing } from './NoteButton.js';
 
-const buttonGridContainer = document.getElementById('buttonGridContainer');
+const buttonGridContainer = document.getElementById('buttonGridContainer') as HTMLDivElement;
 
 const noteButtonGroups: (NoteButton[])[] = [];
 

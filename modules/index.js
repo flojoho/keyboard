@@ -25,7 +25,7 @@ function noteKeyGotPressed(keyCode) {
     note.start();
     ButtonGrid.enableHighlight(noteNumber);
     incrementStatistics({
-        volume: volumeSlider.value,
+        volume: parseInt(volumeSlider.value),
         noteNumber: noteNumber
     });
 }
@@ -49,7 +49,7 @@ const onKeyDown = e => {
             nextVolume = 100;
         if (nextVolume < 0)
             nextVolume = 0;
-        volumeSlider.value = nextVolume;
+        volumeSlider.value = nextVolume.toString();
         AudioHandler.setVolume(nextVolume);
         return;
     }
