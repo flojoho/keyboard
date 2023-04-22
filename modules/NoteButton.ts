@@ -21,7 +21,7 @@ class NoteButton {
   private div
   private x: number
   private xTouchStart: number
-  private note
+  private note: Note
   public noteNumber: number
   
   constructor(noteNumber: number, x: number, y: number) {

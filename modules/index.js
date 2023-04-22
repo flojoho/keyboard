@@ -35,12 +35,12 @@ function noteKeyGotReleased(keyCode) {
     ButtonGrid.disableHighlight(noteNumber);
 }
 //**************************** EVENT HANDLING ************************
-const onKeyDown = e => {
+document.addEventListener('keydown', e => {
     if (['ArrowUp', 'ArrowDown'].includes(e.code)) {
-        const prevVolume = volumeSlider.value;
+        const prevVolume = parseFloat(volumeSlider.value);
         let nextVolume;
         if (e.code === 'ArrowUp') {
-            nextVolume = Number.parseFloat(prevVolume) + 5;
+            nextVolume = prevVolume + 5;
         }
         else {
             nextVolume = prevVolume - 5;
@@ -72,8 +72,7 @@ const onKeyDown = e => {
         pressedKeys[e.code] = true;
         noteKeyGotPressed(e.code);
     }
-};
-document.addEventListener('keydown', onKeyDown);
+});
 document.addEventListener('keyup', e => {
     const noteNumber = noteNumberFromKey(e.code);
     if (!Number.isInteger(noteNumber))
