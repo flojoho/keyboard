@@ -1,6 +1,6 @@
 import { setDiameter, setSpacing } from "./NoteButton.js";
 import ButtonGrid from './ButtonGrid.js';
-import settings from './settings.js';
+import settings from '../settings.js';
 
 const modal = document.getElementById('modal') as HTMLDivElement;
 const settingsButton = document.getElementById('settings-button') as HTMLButtonElement;

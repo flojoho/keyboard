@@ -30,6 +30,7 @@ footer>div {
 
 main {
   flex: 1;
+  position: relative;
 }
 
 
@@ -118,4 +119,17 @@ aside>div>div {
 
 .flex-stretch {
   flex: 1;
+}
+
+#button-grid-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+#heat-map {
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  position: absolute;
 }

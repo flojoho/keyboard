@@ -1,5 +1,5 @@
 import NoteButton, { getDiameter, getSpacing } from './NoteButton.js';
-const buttonGridContainer = document.getElementById('buttonGridContainer');
+const buttonGridContainer = document.getElementById('button-grid-container');
 const noteButtonGroups = [];
 const addToNoteButtonGroup = (noteButton) => {
     const { noteNumber } = noteButton;

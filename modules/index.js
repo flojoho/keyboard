@@ -1,7 +1,8 @@
 import { noteNumberFromKey, transposeUp, transposeDown } from './KeyMapping.js';
 import AudioHandler, { Note } from './AudioHandler.js';
-import './SettingsModal.js';
-import ButtonGrid from './ButtonGrid.js';
+import './ui/SettingsModal.js';
+import ButtonGrid from './ui/ButtonGrid.js';
+import './ui/HeatMap.js';
 ButtonGrid.render();
 addEventListener('resize', ButtonGrid.render);
 const volumeSlider = document.getElementById('volumeSlider');
