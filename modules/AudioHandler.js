@@ -63,10 +63,13 @@ export class Note {
         _Note_instances.add(this);
         _Note_noteNumber.set(this, void 0);
         _Note_oscillator.set(this, void 0);
+        this.fadeDuration = 0.005;
+        this.oscillatorType = timbreSelect.value;
         __classPrivateFieldSet(this, _Note_noteNumber, noteNumber, "f");
     }
     start() {
         ensureContext();
+        this.gainNode = context.createGain();
         __classPrivateFieldGet(this, _Note_instances, "m", _Note_addOscillator).call(this);
     }
     stop() {
@@ -81,18 +84,20 @@ export class Note {
 }
 _Note_noteNumber = new WeakMap(), _Note_oscillator = new WeakMap(), _Note_instances = new WeakSet(), _Note_addOscillator = function _Note_addOscillator() {
     const frequency = frequencyFromNoteNumber(__classPrivateFieldGet(this, _Note_noteNumber, "f"));
-    const oscillatorType = timbreSelect.value;
     const note = {};
     __classPrivateFieldSet(this, _Note_oscillator, context.createOscillator(), "f");
     __classPrivateFieldGet(this, _Note_oscillator, "f").frequency.setValueAtTime(frequency, context.currentTime);
-    __classPrivateFieldGet(this, _Note_oscillator, "f").type = oscillatorType;
-    const gainNode = context.createGain();
-    gainNode.gain.value = gainBalanceFactors[oscillatorType];
-    __classPrivateFieldGet(this, _Note_oscillator, "f").connect(gainNode);
-    gainNode.connect(volumeNode);
+    __classPrivateFieldGet(this, _Note_oscillator, "f").type = this.oscillatorType;
+    __classPrivateFieldGet(this, _Note_oscillator, "f").connect(this.gainNode);
+    this.gainNode.connect(volumeNode);
     __classPrivateFieldGet(this, _Note_oscillator, "f").start();
-    // gainNode.gain.setTargetAtTime(0, context.currentTime, 2);
+    const now = context.currentTime;
+    this.gainNode.gain.setValueAtTime(0, now);
+    this.gainNode.gain.linearRampToValueAtTime(gainBalanceFactors[this.oscillatorType], now + this.fadeDuration);
 }, _Note_removeOscillator = function _Note_removeOscillator() {
-    __classPrivateFieldGet(this, _Note_oscillator, "f").stop();
+    const now = context.currentTime;
+    this.gainNode.gain.setValueAtTime(gainBalanceFactors[this.oscillatorType], now);
+    this.gainNode.gain.linearRampToValueAtTime(0, now + this.fadeDuration);
+    __classPrivateFieldGet(this, _Note_oscillator, "f").stop(now + this.fadeDuration);
 };
 export default { stopAllNotes, setVolume, changeTimbre, Note };

@@ -2,7 +2,7 @@
 const canvas = document.getElementById('heat-map') as HTMLCanvasElement;
 const buttonGridContainer = document.getElementById('button-grid-container') as HTMLDivElement;
 
-const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d')!;
 
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;

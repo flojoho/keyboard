@@ -59,8 +59,11 @@ const frequencyFromNoteNumber = (noteNumber: number) => {
 }
 
 export class Note {
-  #noteNumber
-  #oscillator
+  #noteNumber;
+  #oscillator;
+  fadeDuration = 0.005;
+  gainNode;
+  oscillatorType = timbreSelect.value;
   
   constructor(noteNumber: number) {
     this.#noteNumber = noteNumber;
@@ -68,6 +71,7 @@ export class Note {
 
   start() {
     ensureContext();
+    this.gainNode = context.createGain();
     this.#addOscillator();
   }
 
@@ -84,25 +88,27 @@ export class Note {
 
   #addOscillator() {
     const frequency = frequencyFromNoteNumber(this.#noteNumber);
-    const oscillatorType = timbreSelect.value;
     
     const note = {};
     this.#oscillator = context.createOscillator();
     this.#oscillator.frequency.setValueAtTime(frequency, context.currentTime);
-    this.#oscillator.type = oscillatorType;
+    this.#oscillator.type = this.oscillatorType;
 
-    const gainNode = context.createGain();
-    gainNode.gain.value = gainBalanceFactors[oscillatorType];
-
-    this.#oscillator.connect(gainNode);
-    gainNode.connect(volumeNode);
+    this.#oscillator.connect(this.gainNode);
+    this.gainNode.connect(volumeNode);
 
     this.#oscillator.start();
-    // gainNode.gain.setTargetAtTime(0, context.currentTime, 2);
+
+    const now = context.currentTime;
+    this.gainNode.gain.setValueAtTime(0, now);
+    this.gainNode.gain.linearRampToValueAtTime(gainBalanceFactors[this.oscillatorType], now + this.fadeDuration);
   }
 
   #removeOscillator() {
-    this.#oscillator.stop();
+    const now = context.currentTime;
+    this.gainNode.gain.setValueAtTime(gainBalanceFactors[this.oscillatorType], now);
+    this.gainNode.gain.linearRampToValueAtTime(0, now + this.fadeDuration);
+    this.#oscillator.stop(now + this.fadeDuration);
   }
 }
 

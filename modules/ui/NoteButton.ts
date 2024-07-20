@@ -18,11 +18,11 @@ export const setSpacing = (num: number) => {
 }
 
 class NoteButton {
-  private div
-  private x: number
-  private xTouchStart: number
-  private note: Note
-  public noteNumber: number
+  private div;
+  private x: number;
+  private xTouchStart: number = 0;
+  private note?: Note;
+  public noteNumber: number;
   
   constructor(noteNumber: number, x: number, y: number) {
     this.noteNumber = noteNumber;
@@ -60,7 +60,7 @@ class NoteButton {
       const xMouse = e.targetTouches[0].clientX
 
       const pitchChange = (xMouse - this.xTouchStart) / (diameter + spacing);
-      this.note.changePitch(pitchChange);
+      this.note?.changePitch(pitchChange);
 
       this.div.style.left = `${ this.x + (xMouse - this.xTouchStart) }px`;
     });
@@ -68,7 +68,7 @@ class NoteButton {
     this.div.addEventListener('touchend', e => {
       e.preventDefault();
       
-      this.note.stop();
+      this.note?.stop();
       this.note = undefined;
 
       this.disableHighlight();
