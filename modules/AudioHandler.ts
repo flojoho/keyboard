@@ -61,7 +61,8 @@ const frequencyFromNoteNumber = (noteNumber: number) => {
 export class Note {
   #noteNumber;
   #oscillator;
-  fadeDuration = 0.005;
+  fadeInDuration = 0.005;
+  fadeOutDuration = 0.08;
   gainNode;
   oscillatorType = timbreSelect.value;
   
@@ -101,14 +102,14 @@ export class Note {
 
     const now = context.currentTime;
     this.gainNode.gain.setValueAtTime(0, now);
-    this.gainNode.gain.linearRampToValueAtTime(gainBalanceFactors[this.oscillatorType], now + this.fadeDuration);
+    this.gainNode.gain.linearRampToValueAtTime(gainBalanceFactors[this.oscillatorType], now + this.fadeInDuration);
   }
 
   #removeOscillator() {
     const now = context.currentTime;
     this.gainNode.gain.setValueAtTime(gainBalanceFactors[this.oscillatorType], now);
-    this.gainNode.gain.linearRampToValueAtTime(0, now + this.fadeDuration);
-    this.#oscillator.stop(now + this.fadeDuration);
+    this.gainNode.gain.linearRampToValueAtTime(0, now + this.fadeOutDuration);
+    this.#oscillator.stop(now + this.fadeOutDuration);
   }
 }
 

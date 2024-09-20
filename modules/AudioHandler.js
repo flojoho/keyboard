@@ -63,7 +63,8 @@ export class Note {
         _Note_instances.add(this);
         _Note_noteNumber.set(this, void 0);
         _Note_oscillator.set(this, void 0);
-        this.fadeDuration = 0.005;
+        this.fadeInDuration = 0.005;
+        this.fadeOutDuration = 0.08;
         this.oscillatorType = timbreSelect.value;
         __classPrivateFieldSet(this, _Note_noteNumber, noteNumber, "f");
     }
@@ -93,11 +94,11 @@ _Note_noteNumber = new WeakMap(), _Note_oscillator = new WeakMap(), _Note_instan
     __classPrivateFieldGet(this, _Note_oscillator, "f").start();
     const now = context.currentTime;
     this.gainNode.gain.setValueAtTime(0, now);
-    this.gainNode.gain.linearRampToValueAtTime(gainBalanceFactors[this.oscillatorType], now + this.fadeDuration);
+    this.gainNode.gain.linearRampToValueAtTime(gainBalanceFactors[this.oscillatorType], now + this.fadeInDuration);
 }, _Note_removeOscillator = function _Note_removeOscillator() {
     const now = context.currentTime;
     this.gainNode.gain.setValueAtTime(gainBalanceFactors[this.oscillatorType], now);
-    this.gainNode.gain.linearRampToValueAtTime(0, now + this.fadeDuration);
-    __classPrivateFieldGet(this, _Note_oscillator, "f").stop(now + this.fadeDuration);
+    this.gainNode.gain.linearRampToValueAtTime(0, now + this.fadeOutDuration);
+    __classPrivateFieldGet(this, _Note_oscillator, "f").stop(now + this.fadeOutDuration);
 };
 export default { stopAllNotes, setVolume, changeTimbre, Note };
